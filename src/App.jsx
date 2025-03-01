@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import DetailService from "./pages/DetailServices";
 import AuthPage from "./pages/AuthPage"; // 
 import Footer from "./components/Navigations/Footer";
-import AdminPanel from "./pages/AdminPanel";
+import ListOrders from "./pages/ListOrders";
 import Profile from "./pages/Profile";
 import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -12,7 +12,7 @@ import { FaXTwitter } from "react-icons/fa6";
 const dummyUser = {
   name: "John Doe",
   profilePicture: "https://avatar.iran.liara.run/public/50",
-  isAdmin: false,
+  isAdmin: true,
 };
 
 const reviews = [
@@ -61,7 +61,7 @@ export default function App() {
           path="/admin"
           element={
             <>
-              <AdminPanel dummyUser={dummyUser} />
+              <ListOrders dummyUser={dummyUser} />
             </>
           }
         />
