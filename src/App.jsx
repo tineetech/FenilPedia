@@ -13,7 +13,7 @@ import CreateProduct from "./pages/CreateProduct";
 const dummyUser = {
   name: "John Doe",
   profilePicture: "https://avatar.iran.liara.run/public/50",
-  isAdmin: true,
+  isAdmin: false,
   isLoggedIn: true,
 };
 

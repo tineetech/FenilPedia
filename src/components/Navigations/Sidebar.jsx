@@ -23,7 +23,7 @@ export default function Sidebar({ dummyUser }) {
             <div className={`h-screen w-64 bg-gray-900 text-white flex flex-col justify-between fixed left-0 top-0 shadow-lg transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-64"} md:translate-x-0 transition-transform duration-300 z-40`}>
                 {/* Menu */}
                 <div className="p-4">
-                    <h1 className="text-xl font-bold text-center mb-6">Admin Panel</h1>
+                    <img src="/assets/logoText.svg" alt="Logo" className="my-4 w-[80%] ml-3" />
                     <ul>
                         {dummyUser.isAdmin ? (
                             <>
