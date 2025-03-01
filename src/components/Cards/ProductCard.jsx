@@ -13,7 +13,7 @@ export default function ProductCard({ filteredServices }) {
                         key={service.id}
                         className="bg-white shadow-lg rounded-xl p-4 flex flex-col items-center cursor-pointer transition hover:shadow-xl w-64"
                         whileHover={{ scale: 1.05 }}
-                        onClick={() => navigate(`/service/${service.id}`)}
+                        onClick={() => navigate(`/order`)}
                     >
                         <div className="bg-white drop-shadow-lg p-3 rounded-full mb-4 text-teal-400">
                             {service.icon}

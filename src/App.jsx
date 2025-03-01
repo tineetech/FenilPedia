@@ -1,13 +1,14 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Navigations/Header";
 import Home from "./pages/Home";
-import DetailService from "./pages/DetailServices";
+import Order from "./pages/Order";
 import AuthPage from "./pages/AuthPage"; // 
 import Footer from "./components/Navigations/Footer";
 import ListOrders from "./pages/ListOrders";
 import Profile from "./pages/Profile";
 import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
+import CreateProduct from "./pages/CreateProduct";
 
 const dummyUser = {
   name: "John Doe",
@@ -48,11 +49,11 @@ export default function App() {
           }
         />
         <Route
-          path="/service/:id"
+          path="/order"
           element={
             <>
               <Header />
-              <DetailService services={services} />
+              <Order services={services} />
               <Footer />
             </>
           }
@@ -62,6 +63,14 @@ export default function App() {
           element={
             <>
               <ListOrders dummyUser={dummyUser} />
+            </>
+          }
+        />
+        <Route
+          path="/admin/create-product"
+          element={
+            <>
+              <CreateProduct dummyUser={dummyUser} />
             </>
           }
         />

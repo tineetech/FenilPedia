@@ -3,7 +3,7 @@ import { Phone } from "lucide-react";
 
 export default function AboutSection() {
     return (
-        <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-12 gap-8 md:gap-16 mt-4" id="tentang" >
+        <div className="flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto px-6 py-12 gap-8 md:gap-16 mt-4" id="tentang kami" >
             {/* Logo */}
             <div className="flex-shrink-0 md:w-1/3 flex justify-center">
                 <img src="/assets/logo.svg" alt="Logo" className="w-28 md:w-36" />
