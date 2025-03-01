@@ -16,7 +16,7 @@ export default function Sidebar({ dummyUser }) {
                 className="md:hidden p-3 bg-teal-500 rounded-full text-white fixed bottom-8 right-5 z-50"
                 onClick={() => setIsSidebarOpen(!isSidebarOpen)}
             >
-                <FaBars size={24} />
+                <FaBars className="text-xs md:text-lg" />
             </button>
 
             {/* Sidebar */}
@@ -28,26 +28,26 @@ export default function Sidebar({ dummyUser }) {
                         {dummyUser.isAdmin ? (
                             <>
                                 <li>
-                                    <Link to="/admin" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
-                                        <FaList /> List Order
+                                    <Link to="/admin" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                        <FaList className="text-xs md:text-lg" /> List Order
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link to="/admin/create-product" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
-                                        <FaPlus /> Buat Produk Baru
+                                    <Link to="/admin/create-product" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                        <FaPlus className="text-xs md:text-lg" /> Buat Produk Baru
                                     </Link>
                                 </li>
                             </>
                         ) : (
                             <li>
-                                <Link to="/#layanan" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
-                                    <FaList /> Order
+                                <Link to="/#layanan" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                    <FaList className="text-xs md:text-lg" /> Order
                                 </Link>
                             </li>
                         )}
                         <li>
-                            <Link to="/" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
-                                <FaHome /> Beranda
+                            <Link to="/" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                <FaHome className="text-xs md:text-lg" /> Beranda
                             </Link>
                         </li>
                     </ul>
@@ -56,11 +56,11 @@ export default function Sidebar({ dummyUser }) {
                 {/* Profile */}
                 <div className="relative p-4">
                     <button
-                        className="flex items-center justify-between w-full p-3 bg-gray-800 rounded-md"
+                        className="flex items-center justify-between w-full p-3 bg-gray-800 rounded-md text-xs md:text-base"
                         onClick={() => setIsProfileOpen(!isProfileOpen)}
                     >
                         <span className="flex items-center gap-3">
-                            <FaUserCircle size={20} /> Profile
+                            <FaUserCircle className="text-base md:text-lg" /> Profile
                         </span>
                         <motion.span animate={{ rotate: isProfileOpen ? 180 : 0 }}>
                             ▼
@@ -76,11 +76,11 @@ export default function Sidebar({ dummyUser }) {
                                 transition={{ duration: 0.3 }}
                                 className="absolute bottom-14 w-full bg-gray-800 rounded-md shadow-md overflow-hidden"
                             >
-                                <Link to="/profile" className="flex items-center gap-3 p-3 hover:bg-gray-700">
-                                    <FaUser /> Profile
+                                <Link to="/profile" className="flex items-center gap-3 p-3 hover:bg-gray-700 text-xs md:text-base">
+                                    <FaUser className="text-xs md:text-lg" /> Profile
                                 </Link>
-                                <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-gray-700">
-                                    <LogOut /> Logout
+                                <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-gray-700 text-xs md:text-base">
+                                    <LogOut className="text-xs md:text-lg" /> Logout
                                 </button>
                             </motion.div>
                         )}

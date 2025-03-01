@@ -94,7 +94,7 @@ export default function AdminPanel({ dummyUser }) {
                         <input
                             type="text"
                             placeholder="Cari berdasarkan nama"
-                            className="w-full md:w-1/3 p-2 border border-gray-300 rounded"
+                            className="w-full md:w-2/3 p-2 border border-gray-300 rounded"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -102,7 +102,7 @@ export default function AdminPanel({ dummyUser }) {
                             selected={selectedDate}
                             onChange={setSelectedDate}
                             placeholderText="Tanggal"
-                            className="w-full md:w-1/3 p-2 border border-gray-300 rounded"
+                            className="w-full md:w-3/3 p-2 border border-gray-300 rounded"
                         />
                     </div>
 

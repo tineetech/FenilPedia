@@ -31,7 +31,7 @@ export default function Profile({ dummyUser }) {
                 <div className="w-full mt-12 p-4 md:p-6 mx-auto max-w-4xl">
                     {dummyUser.isAdmin ? (
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <Link to="/create-product" className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all text-center">
+                            <Link to="/admin/create-product" className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition-all text-center">
                                 Buat Produk Baru
                             </Link>
                             <Link to="/admin" className="w-full bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition-all text-center">
