@@ -1,10 +1,11 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaList, FaUser, FaUserCircle, FaHome } from "react-icons/fa";
+import { FaList, FaUser, FaUserCircle, FaHome, FaPlus } from "react-icons/fa";
 import { LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Sidebar() {
+export default function Sidebar({ dummyUser }) {
     const [isProfileOpen, setIsProfileOpen] = useState(false);
 
     return (
@@ -13,11 +14,26 @@ export default function Sidebar() {
             <div className="p-4">
                 <h1 className="text-xl font-bold text-center mb-6">Admin Panel</h1>
                 <ul>
-                    <li>
-                        <Link to="/admin" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
-                            <FaList /> List Order
-                        </Link>
-                    </li>
+                    {dummyUser.isAdmin ? (
+                        <>
+                            <li>
+                                <Link to="/admin" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
+                                    <FaList /> List Order
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/admin/create-product" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
+                                    <FaPlus /> Buat Produk Baru
+                                </Link>
+                            </li>
+                        </>
+                    ) : (
+                        <li>
+                            <Link to="/orders" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
+                                <FaList /> Order
+                            </Link>
+                        </li>
+                    )}
                     <li>
                         <Link to="/" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md">
                             <FaHome /> Beranda

@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.9",
-    "flaticon": "^0.1.0",
+    "fenilpedia": ".",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",

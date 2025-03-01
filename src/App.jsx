@@ -9,6 +9,11 @@ import Profile from "./pages/Profile";
 import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 
+const dummyUser = {
+  name: "John Doe",
+  profilePicture: "https://avatar.iran.liara.run/public/50",
+  isAdmin: false,
+};
 
 const reviews = [
   { name: "Budi Santoso", review: "Layanannya sangat berkualitas! Saya sangat puas dengan hasilnya.", rating: 5, avatar: "https://avatar.iran.liara.run/public/49" },
@@ -56,7 +61,7 @@ export default function App() {
           path="/admin"
           element={
             <>
-              <AdminPanel />
+              <AdminPanel dummyUser={dummyUser} />
             </>
           }
         />
@@ -64,7 +69,7 @@ export default function App() {
           path="/profile"
           element={
             <>
-              <Profile />
+              <Profile dummyUser={dummyUser} />
             </>
           }
         />

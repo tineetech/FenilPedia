@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import Select from "react-select";
 import DatePicker from "react-datepicker";
@@ -20,7 +21,7 @@ const serviceOptions = [
     { value: "Facebook", label: "Facebook" },
 ];
 
-export default function AdminPanel() {
+export default function AdminPanel({ dummyUser }) {
     const [orders, setOrders] = useState(initialOrders);
     const [selectedService, setSelectedService] = useState(null);
     const [searchTerm, setSearchTerm] = useState("");
@@ -70,7 +71,7 @@ export default function AdminPanel() {
 
     return (
         <div className="flex min-h-screen">
-            <Sidebar />
+            <Sidebar dummyUser={dummyUser} />
 
             {/* Content */}
             <div className="flex-1 pl-64">

@@ -1,23 +1,18 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import Wave from "../components/Wave";
 import SideBar from "../components/Navigations/Sidebar";
 import Footer from "../components/Navigations/Footer";
-
-const dummyUser = {
-    name: "John Doe",
-    profilePicture: "https://avatar.iran.liara.run/public/50",
-    isAdmin: true,
-};
 
 const userOrders = [
     { id: 1, name: "Paket Instagram Likes", status: "Pending", date: new Date("2024-02-01") },
     { id: 2, name: "Paket YouTube Views", status: "Completed", date: new Date("2024-02-05") },
 ];
 
-export default function Profile() {
+export default function Profile({ dummyUser }) {
     return (
         <div className="flex min-h-screen">
-            <SideBar />
+            <SideBar dummyUser={dummyUser} />
 
             {/* Content */}
             <div className="flex-1 pl-64">
@@ -36,10 +31,10 @@ export default function Profile() {
                 <div className="w-full mt-12 p-6 mx-auto">
                     {dummyUser.isAdmin ? (
                         <div className="flex flex-row space-x-12">
-                            <Link to="/admin" className="w-full bg-blue-600 text-white py-3 px-12 rounded-lg hover:bg-blue-700 transition-all text-center">
+                            <Link to="/create-product" className="w-full bg-blue-600 text-white py-3 px-12 rounded-lg hover:bg-blue-700 transition-all text-center">
                                 Buat Produk Baru
                             </Link>
-                            <Link to="/orders" className="w-full bg-green-600 text-white py-3 px-12 rounded-lg hover:bg-green-700 transition-all text-center">
+                            <Link to="/admin" className="w-full bg-green-600 text-white py-3 px-12 rounded-lg hover:bg-green-700 transition-all text-center">
                                 Pergi ke List Order
                             </Link>
                         </div>
