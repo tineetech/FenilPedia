@@ -55,7 +55,7 @@ export default function Header() {
                                 <img
                                     src={dummyUser.profilePicture}
                                     alt="Profile"
-                                    className="w-10 h-10 rounded-full border border-gray-300"
+                                    className="w-10 h-10 rounded-full border border-neutral-300"
                                 />
                             </button>
                             <AnimatePresence>
@@ -67,11 +67,13 @@ export default function Header() {
                                         transition={{ duration: 0.2 }}
                                         className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2"
                                     >
-                                        <Link to="/profile" className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                                            <User size={16} className="mr-2 mt-0.75" /> Profile
+                                        <Link to="/profile" className="flex px-4 py-2 text-neutral-800 hover:bg-neutral-100">
+                                            <User size={16} className="mr-2 mt-0.75" />
+                                            <h1>Profile</h1>
                                         </Link>
-                                        <button className="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
-                                            <LogOut size={16} className="mr-2 mt-0.75" /> Logout
+                                        <button className="w-full flex px-4 py-2 text-neutral-800 hover:bg-neutral-100">
+                                            <LogOut size={16} className="mr-2 mt-0.75" />
+                                            <h1>Logout</h1>
                                         </button>
                                     </motion.div>
                                 )}
@@ -107,7 +109,7 @@ export default function Header() {
                                     <img
                                         src={dummyUser.profilePicture}
                                         alt="Profile"
-                                        className="w-14 h-14 rounded-full border border-gray-300"
+                                        className="w-14 h-14 rounded-full border border-neutral-300"
                                     />
                                 </button>
                                 <p className="mt-2 text-lg font-semibold">{dummyUser.name}</p>
@@ -146,7 +148,7 @@ export default function Header() {
                                 key={index}
                                 onClick={() => setIsOpen(false)}
                                 href={`/#${item.label.toLowerCase().replace(/\s+/g, '-')}`}
-                                className="flex items-center text-sm text-gray-500 hover:text-teal-300"
+                                className="flex items-center text-sm text-neutral-500 hover:text-teal-300"
                             >
                                 {item.icon} {item.label}
                             </a>
