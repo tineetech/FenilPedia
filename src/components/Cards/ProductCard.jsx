@@ -11,7 +11,7 @@ export default function ProductCard({ filteredServices }) {
                 {filteredServices.map((service) => (
                     <motion.div
                         key={service.id}
-                        className="bg-white shadow-lg rounded-xl p-4 flex flex-col items-center cursor-pointer transition hover:shadow-xl w-64"
+                        className="bg-white shadow-sm border border-teal-400 rounded-xl p-4 flex flex-col items-center cursor-pointer transition w-64"
                         whileHover={{ scale: 1.05 }}
                         onClick={() => navigate(`/order`)}
                     >

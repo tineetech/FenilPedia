@@ -14,6 +14,7 @@ const dummyUser = {
   name: "John Doe",
   profilePicture: "https://avatar.iran.liara.run/public/50",
   isAdmin: true,
+  isLoggedIn: true,
 };
 
 const reviews = [
@@ -42,7 +43,7 @@ export default function App() {
           path="/"
           element={
             <>
-              <Header />
+              <Header dummyUser={dummyUser} />
               <Home services={services} reviews={reviews} />
               <Footer />
             </>
@@ -52,7 +53,7 @@ export default function App() {
           path="/order"
           element={
             <>
-              <Header />
+              <Header dummyUser={dummyUser} />
               <Order services={services} />
               <Footer />
             </>

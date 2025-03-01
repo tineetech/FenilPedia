@@ -20,7 +20,7 @@ export default function ContactSection() {
     return (
         <div className="max-w-7xl mx-auto px-6 py-12 md:py-20 flex flex-col md:flex-row-reverse items-center gap-10" id="kontak">
             {/* Ilustrasi (Muncul dulu di mobile) */}
-            <div className="w-full md:w-1/2 flex justify-end">
+            <div className="w-full md:w-1/2 flex justify-center lg:justify-end">
                 <img
                     src="/assets/contact.svg" // Ganti dengan ilustrasi yang sesuai
                     alt="Contact Illustration"

@@ -29,7 +29,7 @@ export default function FAQSection() {
         <div className="bg-gradient-to-b from-white to-teal-100">
             <div className="max-w-7xl mx-auto py-24 px-6 flex flex-col md:flex-row items-center gap-12">
                 {/* Ilustrasi */}
-                <div className="w-full md:w-1/2 flex justify-center">
+                <div className="w-[85%] md:w-1/2 flex justify-center">
                     <img src="/assets/faq.svg" alt="FAQ Illustration" className="w-3/4 md:w-full" />
                 </div>
 

@@ -6,8 +6,8 @@ import HeroCard from "../Cards/HeroCard";
 
 export default function HeroSection() {
     return (
-        <section className="relative bg-teal-400 text-white overflow-hidden pt-22">
-            <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col-reverse md:flex-row items-center">
+        <section className="relative bg-teal-400 text-white overflow-hidden pt-24">
+            <div className="container max-w-7xl mx-auto px-8 lg:px-12 flex flex-col-reverse md:flex-row items-center">
                 {/* Kiri: Teks */}
                 <div className="md:w-1/2 text-left">
                     <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">

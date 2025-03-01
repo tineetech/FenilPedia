@@ -14,8 +14,8 @@ export default function Home({ services, reviews }) {
             <AboutSection />
             <FeatureSection />
             <ReviewSection reviews={reviews} />
-            <FAQSection />
             <ProductSection services={services} />
+            <FAQSection />
             <ContactSection />
         </>
     )
