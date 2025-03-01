@@ -135,7 +135,7 @@ export default function Header() {
 
                         {/* Navigation */}
                         {["Beranda", "Tentang Kami", "Layanan", "Kontak"].map((label, index) => (
-                            <a key={index} href={`/#${label.toLowerCase()}`} className="text-lg text-gray-500 hover:text-teal-300">
+                            <a key={index} onClick={() => setIsOpen(false)} href={`/#${label.toLowerCase()}`} className="text-lg text-gray-500 hover:text-teal-300">
                                 {label}
                             </a>
                         ))}
