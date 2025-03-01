@@ -8,7 +8,9 @@ const categories = [
     { value: "Instagram", label: "Instagram" },
     { value: "TikTok", label: "TikTok" },
     { value: "YouTube", label: "YouTube" },
-    { value: "Facebook", label: "Facebook" }
+    { value: "Facebook", label: "Facebook" },
+    { value: "Telegram", label: "Telegram" },
+    { value: "X", label: "X" }
 ];
 
 export default function ProductSection({ services }) {

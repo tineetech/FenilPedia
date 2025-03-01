@@ -19,14 +19,14 @@ export default function HeroSection() {
                     <div className="flex">
                         <Link
                             to="/login"
-                            className="flex align-middle text-center rounded-full bg-white text-teal-500 px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-teal-100 transition-all mr-4"
+                            className="flex align-middle text-center rounded-full bg-white text-teal-500 px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-teal-500 hover:text-white transition-all mr-4"
                         >
                             <LogIn size={18} className="mr-2" />
                             Masuk
                         </Link>
                         <Link
                             to="/login"
-                            className="flex align-middle text-center rounded-full bg-teal-600 text-white px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-teal-100 transition-all"
+                            className="flex align-middle text-center rounded-full bg-teal-500 text-white px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-white hover:text-teal-500 transition-all"
                         >
                             <UserPlus size={18} className="mr-2" />
                             Daftar

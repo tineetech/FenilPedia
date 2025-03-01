@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import HeroSection from "../components/Sections/HeroSection";
-import ContactSection from "../components/Sections/ContactSection";
+import AboutSection from "../components/Sections/AboutSection";
 import FeatureSection from "../components/Sections/FeatureSection";
 import ReviewSection from "../components/Sections/ReviewSection";
 import FAQSection from "../components/Sections/FAQSection";
@@ -10,9 +10,9 @@ export default function Home({ services, reviews }) {
     return (
         <>
             <HeroSection />
-            <ContactSection />
+            <AboutSection />
             <FeatureSection />
-            <ReviewSection reviews={reviews} id="layanan" />
+            <ReviewSection reviews={reviews} />
             <FAQSection />
             <ProductSection services={services} />
         </>

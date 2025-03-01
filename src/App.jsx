@@ -4,8 +4,11 @@ import Home from "./pages/Home";
 import DetailService from "./pages/DetailServices";
 import AuthPage from "./pages/AuthPage"; // 
 import Footer from "./components/Navigations/Footer";
-import ListOrder from "./pages/ListOrder";
-import { Users, Eye, ThumbsUp } from "lucide-react";
+import AdminPanel from "./pages/AdminPanel";
+import Profile from "./pages/Profile";
+import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+
 
 const reviews = [
   { name: "Budi Santoso", review: "Layanannya sangat berkualitas! Saya sangat puas dengan hasilnya.", rating: 5, avatar: "https://avatar.iran.liara.run/public/49" },
@@ -15,14 +18,14 @@ const reviews = [
 ];
 
 const services = [
-  { id: 1, name: "Instagram Followers", category: "Instagram", price: "Mulai Rp 10.000", icon: <Users size={24} /> },
-  { id: 2, name: "Instagram Likes", category: "Instagram", price: "Mulai Rp 5.000", icon: <ThumbsUp size={24} /> },
-  { id: 3, name: "TikTok Followers", category: "TikTok", price: "Mulai Rp 12.000", icon: <Users size={24} /> },
-  { id: 4, name: "TikTok Views", category: "TikTok", price: "Mulai Rp 7.000", icon: <Eye size={24} /> },
-  { id: 5, name: "YouTube Views", category: "YouTube", price: "Mulai Rp 15.000", icon: <Eye size={24} /> },
-  { id: 6, name: "YouTube Subscribers", category: "YouTube", price: "Mulai Rp 25.000", icon: <Users size={24} /> },
-  { id: 7, name: "Facebook Likes", category: "Facebook", price: "Mulai Rp 8.000", icon: <ThumbsUp size={24} /> },
+  { id: 1, name: "Instagram Likes", category: "Instagram", price: "Mulai Rp 5.000", icon: <FaInstagram size={24} /> },
+  { id: 2, name: "TikTok Followers", category: "TikTok", price: "Mulai Rp 12.000", icon: <FaTiktok size={24} /> },
+  { id: 3, name: "YouTube Subscribers", category: "YouTube", price: "Mulai Rp 25.000", icon: <FaYoutube size={24} /> },
+  { id: 4, name: "Facebook Likes", category: "Facebook", price: "Mulai Rp 8.000", icon: <FaFacebook size={24} /> },
+  { id: 5, name: "Telegram Subscribers", category: "Telegram", price: "Mulai Rp 10.000", icon: <FaTelegramPlane size={24} /> },
+  { id: 6, name: "X Followers", category: "X", price: "Mulai Rp 20.000", icon: <FaXTwitter size={24} /> },
 ];
+
 
 export default function App() {
   return (
@@ -53,9 +56,15 @@ export default function App() {
           path="/admin"
           element={
             <>
-              <Header />
-              <ListOrder />
-              <Footer />
+              <AdminPanel />
+            </>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <>
+              <Profile />
             </>
           }
         />
