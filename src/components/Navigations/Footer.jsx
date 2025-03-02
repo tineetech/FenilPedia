@@ -18,13 +18,20 @@ export default function Footer() {
                 <div className="flex flex-col space-y-3">
                     <h3 className="text-lg font-semibold">Navigasi</h3>
                     <ul className="space-y-2">
-                        {["Beranda", "Layanan", "Tentang Kami", "Kontak"].map((item, index) => (
+                        {[
+                            { label: "Beranda", href: "#hero" },
+                            { label: "Layanan", href: "#layanan" },
+                            { label: "Tentang Kami", href: "#tentang kami" },
+                            { label: "Kontak", href: "#kontak" }
+                        ].map((item, index) => (
                             <motion.li
                                 key={index}
                                 whileHover={{ x: 5 }}
                                 className="text-gray-400 hover:text-white cursor-pointer transition"
                             >
-                                {item}
+                                <a href={item.href} className="block w-full">
+                                    {item.label}
+                                </a>
                             </motion.li>
                         ))}
                     </ul>

@@ -9,6 +9,7 @@ import Profile from "./pages/Profile";
 import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import CreateProduct from "./pages/CreateProduct";
+import NullPage from "./pages/NullPage";
 
 const dummyUser = {
   name: "John Doe",
@@ -87,6 +88,10 @@ export default function App() {
         {/* Halaman Login & Register (tanpa Header & Footer) */}
         <Route path="/login" element={<AuthPage type="login" />} />
         <Route path="/register" element={<AuthPage type="register" />} />
+
+        <Route path="*" element={
+          <NullPage />
+        } />
       </Routes>
     </Router>
   );
