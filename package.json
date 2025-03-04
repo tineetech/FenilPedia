@@ -12,6 +12,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.9",
     "fenilpedia": ".",
+    "firebase": "^11.4.0",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",
@@ -23,6 +24,7 @@
     "react-router-dom": "^7.2.0",
     "react-select": "^5.10.0",
     "react-wavify": "^1.11.1",
+    "sweetalert2": "^11.17.2",
     "swiper": "^11.2.4",
     "tailwindcss": "^4.0.9"
   },

@@ -87,7 +87,8 @@ export default function App() {
 
         {/* Halaman Login & Register (tanpa Header & Footer) */}
         <Route path="/login" element={<AuthPage type="login" />} />
-        <Route path="/register" element={<AuthPage type="register" />} />
+        <Route path="/register" element={<AuthPage type="register" />} /> 
+        <Route path="/logout" element={<AuthPage type="logout" />} />
 
         <Route path="*" element={
           <NullPage />

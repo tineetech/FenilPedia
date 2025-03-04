@@ -67,7 +67,7 @@ export default function Header({ dummyUser }) {
                                             <User size={16} className="mr-2 mt-0.75" />
                                             <h1>Profile</h1>
                                         </Link>
-                                        <button className="w-full flex px-4 py-2 text-neutral-800 hover:bg-neutral-100">
+                                        <button className="w-full flex px-4 py-2 text-neutral-800 hover:bg-neutral-100" onClick={() => window.location.href = '/logout'}>
                                             <LogOut size={16} className="mr-2 mt-0.75" />
                                             <h1>Logout</h1>
                                         </button>

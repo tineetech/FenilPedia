@@ -1,17 +1,75 @@
 /* eslint-disable react/prop-types */
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../utils/firebase";
+import Swal from 'sweetalert2'
 
 export default function AuthPage({ type }) {
-    const [form, setForm] = useState({ email: "", password: "", name: "" });
+    const navigate = useNavigate();
+
+    if (type === 'logout') {
+        signOut(auth).then(() => {
+        // Sign-out successful.
+            localStorage.removeItem('authToken')
+            Swal.fire({
+                title: "Berhasil!",
+                text: "Kamu telah logout!",
+                icon: "success",
+                timer: 2000
+            }).then((res) => {
+                if (res) {
+                    console.log("Signed out successfully")
+                    navigate("/");
+                }
+            })
+        }).catch((error) => {
+            console.log(error)
+        // An error happened.
+        });
+    }
+
+    const [form, setForm] = useState({ email: "", password: "", });
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Form Submitted:", form);
+
+        if (type === "register") {
+            await createUserWithEmailAndPassword(auth, form.email, form.password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user.accessToken);
+                localStorage.setItem('authToken', user.accessToken)
+                navigate("/")
+                return
+                // ...
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage);
+                // ..
+            });
+        } else if (type === 'login') {
+            signInWithEmailAndPassword(auth, form.email, form.password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user.accessToken);
+                localStorage.setItem('authToken', user.accessToken)
+                navigate("/")
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode, errorMessage)
+            });
+        }
     };
 
     return (
@@ -22,19 +80,6 @@ export default function AuthPage({ type }) {
                 </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {type === "register" && (
-                        <div>
-                            <label className="block text-sm font-medium">Nama</label>
-                            <input
-                                type="text"
-                                name="name"
-                                value={form.name}
-                                onChange={handleChange}
-                                className="w-full mt-1 p-2 border rounded-md"
-                                required
-                            />
-                        </div>
-                    )}
                     <div>
                         <label className="block text-sm font-medium">Email</label>
                         <input
