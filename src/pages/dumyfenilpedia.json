@@ -1,0 +1,25 @@
+{
+  "products": {
+    "productId1": {
+      "name": "Product A",
+      "price": 100
+    }
+  },
+  "categories": {
+    "categoryId1": {
+      "name": "Electronics"
+    }
+  },
+  "types": {
+    "typeId1": {
+      "name": "Gadget"
+    }
+  },
+  "orders": {
+    "orderId1": {
+      "userId": "user123",
+      "productId": "productId1",
+      "quantity": 2
+    }
+  }
+}

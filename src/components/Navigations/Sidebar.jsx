@@ -23,8 +23,9 @@ export default function Sidebar({ dummyUser }) {
             <div className={`h-screen w-64 bg-gray-900 text-white flex flex-col justify-between fixed left-0 top-0 shadow-lg transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-64"} md:translate-x-0 transition-transform duration-300 z-40`}>
                 {/* Menu */}
                 <div className="p-4">
-                    <img src="/assets/logoText.svg" alt="Logo" className="my-4 w-[80%] ml-3" />
-                    <ul>
+                    {/* <img src="/assets/logoText.svg" alt="Logo" className="my-4 w-[80%] ml-3" /> */}
+                    <span className={`font-bold mx-2 text-white`}>FinelPedia</span>
+                    <ul className="mt-5">
                         {dummyUser.isAdmin ? (
                             <>
                                 <li>
@@ -79,9 +80,9 @@ export default function Sidebar({ dummyUser }) {
                                 <Link to="/profile" className="flex items-center gap-3 p-3 hover:bg-gray-700 text-xs md:text-base">
                                     <FaUser className="text-xs md:text-lg" /> Profile
                                 </Link>
-                                <button className="flex items-center gap-3 p-3 w-full text-left hover:bg-gray-700 text-xs md:text-base">
+                                <Link className="flex items-center gap-3 p-3 w-full text-left hover:bg-gray-700 text-xs md:text-base" to={'/logout'}>
                                     <LogOut className="text-xs md:text-lg" /> Logout
-                                </button>
+                                </Link>
                             </motion.div>
                         )}
                     </AnimatePresence>

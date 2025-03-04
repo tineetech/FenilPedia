@@ -33,13 +33,14 @@ export default function Header({ dummyUser }) {
             <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center h-16 py-8">
                 {/* Logo */}
                 <Link to="/" className="text-xl font-bold w-1/2">
-                    <img src="/assets/logoText.svg" alt="Logo" />
+                    {/* <img src="/assets/logoText.svg" alt="Logo" /> */}
+                    <span className={`${isScrolled ? 'text-neutral-800' : 'text-white'}`}>FinelPedia</span>
                 </Link>
 
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex space-x-6 items-center">
                     {["Beranda", "Tentang Kami", "Layanan", "Kontak"].map((label, index) => (
-                        <a key={index} href={`/#${label.toLowerCase()}`} className={`transition-all ${textColor}`}>
+                        <a key={index} href={`${label === 'Beranda' ? '#' : `/#${label.toLowerCase().replace(/\s+/g, '-')}`}`} className={`transition-all ${textColor}`}>
                             {label}
                         </a>
                     ))}
@@ -104,7 +105,7 @@ export default function Header({ dummyUser }) {
                                 <a
                                     key={index}
                                     onClick={() => setIsOpen(false)}
-                                    href={`/#${item.label.toLowerCase().replace(/\s+/g, '-')}`}
+                                    href={`${item.label === 'Beranda' ? '#' : `/#${item.label.toLowerCase().replace(/\s+/g, '-')}`}`}
                                     className="flex items-center text-sm text-neutral-500 hover:text-teal-300"
                                 >
                                     {item.icon} {item.label}

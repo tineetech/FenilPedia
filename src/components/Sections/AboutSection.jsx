@@ -19,7 +19,7 @@ export default function AboutSection() {
 
                 {/* Button */}
                 <Link
-                    to="/contact"
+                    to="#kontak"
                     className="inline-flex items-center mt-6 px-5 py-2.5 rounded-full bg-teal-400 text-white text-sm md:text-base font-semibold shadow-md hover:bg-teal-600 transition-all"
                 >
                     <Phone size={20} className="mr-2" />

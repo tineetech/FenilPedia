@@ -10,6 +10,10 @@ import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "r
 import { FaXTwitter } from "react-icons/fa6";
 import CreateProduct from "./pages/CreateProduct";
 import NullPage from "./pages/NullPage";
+import './App.css'
+import { useEffect, useState } from "react";
+import getMethod from "./utils/GetMethod";
+  
 
 const dummyUser = {
   name: "John Doe",
@@ -25,17 +29,58 @@ const reviews = [
   { name: "Rudi Hartono", review: "Tim supportnya luar biasa, sangat membantu dan fast response!", rating: 4, avatar: "https://avatar.iran.liara.run/public/47" },
 ];
 
-const services = [
-  { id: 1, name: "Instagram Likes", category: "Instagram", price: "Mulai Rp 5.000", icon: <FaInstagram size={24} /> },
-  { id: 2, name: "TikTok Followers", category: "TikTok", price: "Mulai Rp 12.000", icon: <FaTiktok size={24} /> },
-  { id: 3, name: "YouTube Subscribers", category: "YouTube", price: "Mulai Rp 25.000", icon: <FaYoutube size={24} /> },
-  { id: 4, name: "Facebook Likes", category: "Facebook", price: "Mulai Rp 8.000", icon: <FaFacebook size={24} /> },
-  { id: 5, name: "Telegram Subscribers", category: "Telegram", price: "Mulai Rp 10.000", icon: <FaTelegramPlane size={24} /> },
-  { id: 6, name: "X Followers", category: "X", price: "Mulai Rp 20.000", icon: <FaXTwitter size={24} /> },
-];
+// const services = [
+//   { id: 1, name: "Instagram Likes", category: "Instagram", price: "Mulai Rp 5.000", icon: <FaInstagram size={24} /> },
+//   { id: 2, name: "TikTok Followers", category: "TikTok", price: "Mulai Rp 12.000", icon: <FaTiktok size={24} /> },
+//   { id: 3, name: "YouTube Subscribers", category: "YouTube", price: "Mulai Rp 25.000", icon: <FaYoutube size={24} /> },
+//   { id: 4, name: "Facebook Likes", category: "Facebook", price: "Mulai Rp 8.000", icon: <FaFacebook size={24} /> },
+//   { id: 5, name: "Telegram Subscribers", category: "Telegram", price: "Mulai Rp 10.000", icon: <FaTelegramPlane size={24} /> },
+//   { id: 6, name: "X Followers", category: "X", price: "Mulai Rp 20.000", icon: <FaXTwitter size={24} /> },
+// ];
+const platformIcons = {
+  Instagram: <FaInstagram size={24} />,
+  TikTok: <FaTiktok size={24} />,
+  YouTube: <FaYoutube size={24} />,
+  Facebook: <FaFacebook size={24} />,
+  Telegram: <FaTelegramPlane size={24} />,
+  X: <FaXTwitter size={24} />,
+};
+
 
 
 export default function App() {
+  const [services, setServies] = useState([])
+  useEffect(() => {
+      const fetchUtilsGetProduk = async () => {
+          try {
+              const data = await getMethod('products');
+
+              // optional condition
+              if (!data) return 'gagal'
+              const mappedServices = Object.values(data).flatMap((item, index) => {
+                // Jika item berupa array, ambil indeks yang memiliki data produk
+                const produkData = Array.isArray(item) ? item.find(obj => typeof obj === "object") : item;
+          
+                if (!produkData) return []; // Jika tidak ada data, return array kosong
+                
+                return {
+                  id: index + 1,
+                  name: produkData.name || "Unknown Product",
+                  category: produkData.category || "Unknown Category",
+                  price: `Mulai Rp ${produkData.price ? produkData.price.toLocaleString() : "0"}`,
+                  icon: platformIcons[produkData.category] || <FaInstagram size={24} />, // Default icon
+                };
+              });
+              console.log(Object.entries(data))
+              console.log(mappedServices)
+              setServies(mappedServices);
+          } catch (error) {
+              console.error("Gagal mengambil data:", error.message);
+          }
+      };
+
+      fetchUtilsGetProduk()
+  }, [])
   return (
     <Router>
       <Routes>

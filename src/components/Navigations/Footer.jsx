@@ -8,7 +8,8 @@ export default function Footer() {
 
                 {/* Logo */}
                 <div className="flex flex-col space-y-4">
-                    <img src="/assets/logoText.svg" alt="Logo" className="w-36" />
+                    {/* <img src="/assets/logoText.svg" alt="Logo" className="w-36" /> */}
+                    <span className={`font-bold text-lg text-white`}>FinelPedia</span>
                     <p className="text-gray-400 text-sm">
                         Layanan terbaik untuk meningkatkan engagement sosial media Anda dengan hasil optimal dan terpercaya.
                     </p>
@@ -65,7 +66,7 @@ export default function Footer() {
 
             {/* Copyright */}
             <div className="border-t border-gray-700 mt-10 pt-6 text-center text-gray-500 text-sm">
-                © {new Date().getFullYear()} Your Brand. All rights reserved.
+                © {new Date().getFullYear()} FinelPedia. All rights reserved.
             </div>
         </footer>
     );

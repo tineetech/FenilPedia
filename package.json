@@ -10,9 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.5",
     "@tailwindcss/vite": "^4.0.9",
     "fenilpedia": ".",
     "firebase": "^11.4.0",
+    "firebase-admin": "^13.1.0",
     "framer-motion": "^12.4.7",
     "lucide-react": "^0.476.0",
     "react": "^19.0.0",

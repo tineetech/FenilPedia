@@ -11,10 +11,10 @@ export default function HeroSection() {
                 {/* Kiri: Teks */}
                 <div className="md:w-1/2 text-left">
                     <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">
-                        Social Media Marketing Panel Indonesia Terbaik
+                        Kebutuhan Sosial Media Terpercaya dan Terjangkau
                     </h1>
                     <p className="text-xs md:text-base mb-6">
-                        FenilPedia Smm Panel Indonesia adalah sebuah platform bisnis yang menyediakan berbagai layanan social media marketing yang bergerak terutama di Indonesia. Dengan bergabung bersama kami, Anda dapat menjadi penyedia jasa social media atau reseller social media seperti jasa penambah Followers, Likes,Views, Comment, Subcribe, dll. Saat ini tersedia berbagai layanan untuk social media terpopuler seperti Instagram, Facebook, Twitter, Youtube, Tiktok, Threads, Telegram, dll.
+                        FenilPedia adalah sebuah platform bisnis yang menyediakan berbagai layanan sosial media marketing yang bergerak terutama di Indonesia. Kami menyediakan layanan jasa social media seperti penambah Followers, Likes,Views, Comment, Subcribe, dll. Saat ini tersedia berbagai layanan untuk social media terpopuler seperti Instagram, Facebook, Twitter, Youtube, Tiktok, Threads, Telegram, dll.
                     </p>
                     <div className="flex">
                         <Link
