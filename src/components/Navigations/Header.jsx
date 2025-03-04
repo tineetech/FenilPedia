@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, LogIn, LogOut, User, Home, Info, Briefcase, Phone } from "lucide-react";
+import { Menu, X, LogIn, LogOut, User, Home, Info, Briefcase, Phone, LayoutDashboard } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 
@@ -68,6 +68,14 @@ export default function Header({ dummyUser }) {
                                             <User size={16} className="mr-2 mt-0.75" />
                                             <h1>Profile</h1>
                                         </Link>
+                                        {
+                                            dummyUser.isAdmin ? (
+                                                <Link to="/admin" className="flex px-4 py-2 text-neutral-800 hover:bg-neutral-100">
+                                                    <LayoutDashboard size={16} className="mr-2 mt-0.75" />
+                                                    <h1>Panel Admin</h1>
+                                                </Link>
+                                            ) : ''
+                                        }
                                         <button className="w-full flex px-4 py-2 text-neutral-800 hover:bg-neutral-100" onClick={() => window.location.href = '/logout'}>
                                             <LogOut size={16} className="mr-2 mt-0.75" />
                                             <h1>Logout</h1>

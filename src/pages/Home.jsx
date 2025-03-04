@@ -7,10 +7,10 @@ import FAQSection from "../components/Sections/FAQSection";
 import ProductSection from "../components/Sections/ProductSection";
 import ContactSection from "../components/Sections/ContactSection";
 
-export default function Home({ services, reviews }) {
+export default function Home({ services, dummyUser, reviews }) {
     return (
         <>
-            <HeroSection />
+            <HeroSection dummyUser={dummyUser} />
             <AboutSection />
             <FeatureSection />
             <ReviewSection reviews={reviews} />

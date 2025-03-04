@@ -1,6 +1,6 @@
 import { get, ref } from "firebase/database";
 import { db } from "./firebase";
-export default async function getMethod(path) {
+export default async function getMethod2(path) {
   if (!path) return 'error. path harus di isi'
   try {
     const snapshot = await get(ref(db, path));
@@ -10,8 +10,8 @@ export default async function getMethod(path) {
       return [];
     }
 
-    // return snapshot.val();
-    return Object.values(snapshot.val());
+    return snapshot.val();
+    // return Object.values(snapshot.val());
   } catch (err) {
     console.error("Error fetching data:", err.message);
     throw err;

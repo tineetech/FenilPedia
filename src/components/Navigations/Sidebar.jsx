@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { FaList, FaUser, FaUserCircle, FaHome, FaPlus, FaBars } from "react-icons/fa";
+import { FaList, FaUser, FaUserCircle, FaHome, FaPlus, FaBars, FaBox } from "react-icons/fa";
 import { LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -31,6 +31,11 @@ export default function Sidebar({ dummyUser }) {
                                 <li>
                                     <Link to="/admin" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
                                         <FaList className="text-xs md:text-lg" /> List Order
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin/list-product" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                        <FaBox className="text-xs md:text-lg" /> List Produk
                                     </Link>
                                 </li>
                                 <li>

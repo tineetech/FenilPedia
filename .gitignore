@@ -22,3 +22,9 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# ignore be
+be
+be/index.js
+be/*
+be/node_modules

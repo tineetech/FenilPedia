@@ -12,15 +12,12 @@ import CreateProduct from "./pages/CreateProduct";
 import NullPage from "./pages/NullPage";
 import './App.css'
 import { useEffect, useState } from "react";
+import { onAuthStateChanged } from "firebase/auth";
 import getMethod from "./utils/GetMethod";
-  
+import { auth } from "./utils/firebase";
+import { getIdTokenResult } from "firebase/auth";
+import ListProduk from "./pages/ListProduk";
 
-const dummyUser = {
-  name: "John Doe",
-  profilePicture: "https://avatar.iran.liara.run/public/50",
-  isAdmin: false,
-  isLoggedIn: true,
-};
 
 const reviews = [
   { name: "Budi Santoso", review: "Layanannya sangat berkualitas! Saya sangat puas dengan hasilnya.", rating: 5, avatar: "https://avatar.iran.liara.run/public/49" },
@@ -50,6 +47,45 @@ const platformIcons = {
 
 export default function App() {
   const [services, setServies] = useState([])
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [dummyUser, setDummyUser] = useState({
+    name: "John Doe",
+    profilePicture: "https://avatar.iran.liara.run/public/50",
+    isAdmin: false, 
+    isLoggedIn: true,
+  })
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        // Ambil token dan cek apakah user memiliki role admin
+        const token = await getIdTokenResult(currentUser);
+        const isAdmin = token.claims.admin || false;
+  
+        setUser(currentUser);
+        console.log(currentUser)
+        setDummyUser({
+          name: currentUser.email || "User",
+          profilePicture: currentUser.photoURL || "https://avatar.iran.liara.run/public/50",
+          isAdmin: isAdmin, // Set status admin
+          isLoggedIn: true,
+        });
+      } else {
+        setUser(null);
+        setDummyUser({
+          name: "Guest",
+          profilePicture: "https://avatar.iran.liara.run/public/50",
+          isAdmin: false,
+          isLoggedIn: false,
+        });
+      }
+      setLoading(false);
+    });
+  
+    return () => unsubscribe();
+  }, []);
+
   useEffect(() => {
       const fetchUtilsGetProduk = async () => {
           try {
@@ -71,8 +107,6 @@ export default function App() {
                   icon: platformIcons[produkData.category] || <FaInstagram size={24} />, // Default icon
                 };
               });
-              console.log(Object.entries(data))
-              console.log(mappedServices)
               setServies(mappedServices);
           } catch (error) {
               console.error("Gagal mengambil data:", error.message);
@@ -90,7 +124,7 @@ export default function App() {
           element={
             <>
               <Header dummyUser={dummyUser} />
-              <Home services={services} reviews={reviews} />
+              <Home dummyUser={dummyUser} services={services} reviews={reviews} />
               <Footer />
             </>
           }
@@ -118,6 +152,14 @@ export default function App() {
           element={
             <>
               <CreateProduct dummyUser={dummyUser} />
+            </>
+          }
+        />
+        <Route
+          path="/admin/list-product"
+          element={
+            <>
+              <ListProduk dummyUser={dummyUser} />
             </>
           }
         />

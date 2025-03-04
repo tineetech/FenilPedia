@@ -53,6 +53,14 @@ export default function AuthPage({ type }) {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage);
+                
+                Swal.fire({
+                    title: "Gagal Login!",
+                    text: errorMessage.slice(10),
+                    icon: "error",
+                    timer: 2000,
+                    timerProgressBar: true
+                })
                 // ..
             });
         } else if (type === 'login') {
@@ -62,6 +70,14 @@ export default function AuthPage({ type }) {
                 const user = userCredential.user;
                 console.log(user.accessToken);
                 localStorage.setItem('authToken', user.accessToken)
+                
+                Swal.fire({
+                    title: "Berhasil Login!",
+                    text: "Kamu berhasil login",
+                    icon: "success",
+                    timer: 2000,
+                    timerProgressBar: true
+                })
                 navigate("/")
             })
             .catch((error) => {
