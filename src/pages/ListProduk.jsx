@@ -62,7 +62,7 @@ export default function ListProduk({ dummyUser }) {
     });
 
     const columns = [
-        { name: "ID", selector: row => row.id, sortable: true, width: "80px" },
+        { name: "ID", selector: (row, index) => index + 1, sortable: true, width: "80px" },
         { name: "Nama Layanan", selector: row => row.name, sortable: true },
         { name: "Tipe", selector: row => row.serviesType, sortable: true },
         { name: "Brand target", selector: row => row.brandSosmed, sortable: true },

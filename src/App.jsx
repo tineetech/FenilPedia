@@ -17,6 +17,7 @@ import getMethod from "./utils/GetMethod";
 import { auth } from "./utils/firebase";
 import { getIdTokenResult } from "firebase/auth";
 import ListProduk from "./pages/ListProduk";
+import Layanan from "./pages/Layanan";
 
 
 const reviews = [
@@ -130,11 +131,21 @@ export default function App() {
           }
         />
         <Route
+          path="/layanan"
+          element={
+            <>
+              <Header dummyUser={dummyUser} />
+              <Layanan dummyUser={dummyUser} services={services} reviews={reviews} />
+              <Footer />
+            </>
+          }
+        />
+        <Route
           path="/order"
           element={
             <>
               <Header dummyUser={dummyUser} />
-              <Order services={services} />
+              <Order services={services} dummyUser={dummyUser} />
               <Footer />
             </>
           }

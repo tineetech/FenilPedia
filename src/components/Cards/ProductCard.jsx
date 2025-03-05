@@ -11,15 +11,15 @@ export default function ProductCard({ filteredServices }) {
                 {filteredServices.map((service) => (
                     <motion.div
                         key={service.id}
-                        className="bg-white shadow-sm border border-teal-400 rounded-xl p-4 flex flex-col items-center cursor-pointer transition w-64"
-                        whileHover={{ scale: 1.05 }}
+                        className=" border text-white hover:!bg-teal-600 hover:!text-white border-gray-200 rounded-xl p-4 flex flex-col items-center cursor-pointer transition w-64 bg-ig"
+                        whileHover={{ scale: 1.05, background: '' }}
                         onClick={() => navigate(`/order`)}
                     >
-                        <div className="bg-white drop-shadow-lg p-3 rounded-full mb-4 text-teal-400">
+                        <div className="bg-white drop-shadow-lg p-3 rounded-full mb-8 text-teal-400">
                             {service.icon}
                         </div>
                         <h3 className="text-lg font-semibold">{service.name}</h3>
-                        <p className="text-teal-400 font-medium">{service.price}</p>
+                        <p className="font-medium">{service.price}</p>
                     </motion.div>
                 ))}
             </div>

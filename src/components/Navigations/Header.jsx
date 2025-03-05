@@ -40,13 +40,13 @@ export default function Header({ dummyUser }) {
                 {/* Desktop Navigation */}
                 <nav className="hidden md:flex space-x-6 items-center">
                     {["Beranda", "Tentang Kami", "Layanan", "Kontak"].map((label, index) => (
-                        <a key={index} href={`${label === 'Beranda' ? '#' : `/#${label.toLowerCase().replace(/\s+/g, '-')}`}`} className={`transition-all ${textColor}`}>
+                        <a key={index} href={`${label === 'Beranda' ? '/#' : `/#${label.toLowerCase().replace(/\s+/g, '-')}`}`} className={`transition-all ${textColor}`}>
                             {label}
                         </a>
                     ))}
 
                     {/* Profile & Dropdown */}
-                    {dummyUser.isLoggedIn ? (
+                    {dummyUser?.isLoggedIn ? (
                         <div className="relative">
                             <button onClick={() => setDropdownOpen(!dropdownOpen)}>
                                 <img

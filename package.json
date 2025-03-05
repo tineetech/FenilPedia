@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-spring/web": "^9.7.5",
     "@tailwindcss/vite": "^4.0.9",
+    "accounting": "^0.4.1",
     "fenilpedia": ".",
     "firebase": "^11.4.0",
     "firebase-admin": "^13.1.0",

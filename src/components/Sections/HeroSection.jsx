@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { LogIn, UserPlus } from "lucide-react";
+import { LogIn, LogInIcon, UserPlus } from "lucide-react";
 import Wave from "../Wave";
 import HeroCard from "../Cards/HeroCard";
 
@@ -27,9 +27,16 @@ export default function HeroSection({dummyUser}) {
                             </Link>
                         </div>
                     ) : (
-                        <div className="flex">
+                        <div className="flex gap-5">
                             <Link
                                 to="/login"
+                                className="flex align-middle text-center rounded-full bg-white text-teal-600 px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-white hover:text-teal-500 transition-all"
+                            >
+                                <LogInIcon size={18} className="mr-2" />
+                                Login
+                            </Link>
+                            <Link
+                                to="/register"
                                 className="flex align-middle text-center rounded-full bg-teal-500 text-white px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-white hover:text-teal-500 transition-all"
                             >
                                 <UserPlus size={18} className="mr-2" />
