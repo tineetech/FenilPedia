@@ -1,3 +1,149 @@
 html {
-    scroll-behavior: smooth !important;
+  scroll-behavior: smooth !important;
 }
+
+.btn-ai {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  animation: bounceDownUp 1s ease infinite alternate;
+}
+.popup-ai {
+  width: 300px;
+  height: 430px;
+}
+.img-greenai {
+  width: 30px;
+  height: 30px;
+}
+.body-chat-greenai {
+  height: 72%;
+  /* background-color: red; */
+  margin-bottom: 10px;
+  padding-block: 5px;
+  overflow-y: auto;
+  /* scrollbar-width: 0;
+    scrollbar-color: var(--primary) transparent; */
+}
+.body-chat-greenai::-webkit-scrollbar {
+  display: none;
+}
+.bubble {
+  width: 100%;
+  padding-inline: 10px;
+  padding-block: 2px;
+  /* margin-bottom: 3px; */
+}
+.bubble-ai {
+  background-color: #ffffff;
+  box-shadow: 0 0 5px rgba(243, 156, 18, 0.1);
+  border-radius: 5px;
+}
+.bubble-user {
+  background-color: #3674B5;
+  color: #ffffff;
+  border-radius: 5px;
+  text-align: right;
+}
+.sender {
+  font-size: 14px;
+  font-weight: bold;
+  /* font-weight: bo; */
+}
+.sender-ai {
+  color: var(--primary);
+}
+.sender-user {
+  color: #FFF;
+}
+.mess-greenai {
+color: #000;
+  font-size: 12px;
+}
+@keyframes bounceDownUp {
+  0% {
+    transform: translateY(-5px);
+  }
+  100% {
+    transform: translateY(5px);
+  }
+}
+.span-hover-greenai {
+  position: absolute;
+  top: -45px;
+  left: -80px;
+  padding: 5px 10px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  border-radius: 20px 20px 5px 20px;
+}
+.con-btn-ai:hover .span-hover-greenai {
+  opacity: 1 !important;
+}
+
+
+.loader {
+    width: 30px;
+    aspect-ratio: 2;
+    margin-top: 10px !important;
+    margin-bottom: 16px !important;
+    --_g: no-repeat
+      radial-gradient(circle closest-side, #000 90%, #0000);
+    background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+    background-size: calc(100% / 3) 50%;
+    animation: l3 1s infinite linear;
+  }
+  @keyframes l3 {
+    20% {
+      background-position: 0% 0%, 50% 50%, 100% 50%;
+    }
+    40% {
+      background-position: 0% 100%, 50% 0%, 100% 50%;
+    }
+    60% {
+      background-position: 0% 50%, 50% 100%, 100% 0%;
+    }
+    80% {
+      background-position: 0% 50%, 50% 50%, 100% 100%;
+    }
+  }
+  .animation-splash1 {
+    animation: splash1 4s ease-in-out 1s;
+}
+.animation-splash2 {
+    animation: splash2 1s ease-in-out 4s;
+}
+.animation-splash3 {
+    opacity: 0;
+    animation: splash3 1.3s ease-in-out 1s;
+}
+
+  @keyframes splash1 {
+    0% {
+        height: 0;
+    }
+    50% {
+        height: 100%;
+    }
+    100% {
+        height: 0;
+    }
+  }
+  @keyframes splash2 {
+    0% {
+        opacity: 1;
+        display: flex;
+    }
+    100% {
+        opacity: 0;
+        display: none;
+    }
+  }
+  @keyframes splash3 {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+  }

@@ -9,6 +9,7 @@ import getMethod from "../utils/GetMethod";
 import { push, ref } from "firebase/database";
 import { db } from "../utils/firebase";
 import Swal from "sweetalert2";
+import Chatbot from "../components/Chatbot";
 
 const metodePay = [
     { label: "GOPAY - 0878-7480-2713", value: "GOPAY" },
@@ -166,6 +167,7 @@ export default function Order({ dummyUser }) {
 
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
+            <Chatbot />
             <Header dummyUser={dummyUser} />
             <div className="flex-1">
                 <div className="relative bg-teal-500 text-white py-16">

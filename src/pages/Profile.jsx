@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Wave from "../components/Wave";
 import SideBar from "../components/Navigations/Sidebar";
 import Footer from "../components/Navigations/Footer";
+import Chatbot from "../components/Chatbot";
 
 const userOrders = [
     { id: 1, name: "Paket Instagram Likes", status: "Pending", date: new Date("2024-02-01") },
@@ -12,6 +13,7 @@ const userOrders = [
 export default function Profile({ dummyUser }) {
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
+            <Chatbot />
             <SideBar dummyUser={dummyUser} className="hidden md:block" />
 
             {/* Content */}

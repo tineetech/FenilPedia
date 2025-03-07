@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Navigations/Header";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
@@ -18,6 +18,7 @@ import { auth } from "./utils/firebase";
 import { getIdTokenResult } from "firebase/auth";
 import ListProduk from "./pages/ListProduk";
 import Layanan from "./pages/Layanan";
+import GetDummyUser from "./GetDummyUser";
 
 
 const reviews = [
@@ -45,47 +46,51 @@ const platformIcons = {
 };
 
 
+const PrivateRoute = ({element}) => {
+  const { dummyUser } = GetDummyUser()
+  const cekLogin = localStorage.getItem('authToken')
+  // const cekAdmin = sessionStorage.getItem('role')
+    if (!cekLogin && !dummyUser.isLoggedIn && !dummyUser.isAdmin) {
+      return <Navigate to='/' replace />
+    }
+    return element;
+}
+
+const CekAuth = ({element, context}) => {
+  const { dummyUser } = GetDummyUser()
+  const cekLogin = localStorage.getItem('authToken')
+  // const cekAdmin = sessionStorage.getItem('role')
+  if (context === 'profile') {
+    if (!cekLogin && !dummyUser.isLoggedIn) return <Navigate to='/' replace />
+    return element
+  } else if (context === 'login' || context === 'register') {
+    console.log(dummyUser)
+    if (cekLogin && dummyUser && dummyUser.isLoggedIn) return <Navigate to='/' replace />
+    return element
+  }
+    
+  if (!cekLogin && !dummyUser.isLoggedIn) {
+      return <Navigate to='/' replace />
+    } 
+    
+    return element;
+}
+
+const privateRoute = [
+  { route: '/admin', mustLogin: true, role: "admin" },
+  { route: '/admin/list-order', mustLogin: true, role: "admin" },
+  { route: '/admin/list-product', mustLogin: true, role: "admin" },
+  { route: '/admin/create-product', mustLogin: true, role: "admin" },
+  { route: '/profile', mustLogin: true, role: "guest" },
+  { route: '/order', mustLogin: true, role: "guest" },
+  { route: '/login', mustLogin: false, role: "guest" },
+  { route: '/register', mustLogin: false, role: "guest" },
+  { route: '/logout', mustLogin: false, role: "guest" },
+]
 
 export default function App() {
   const [services, setServies] = useState([])
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [dummyUser, setDummyUser] = useState({
-    name: "John Doe",
-    profilePicture: "https://avatar.iran.liara.run/public/50",
-    isAdmin: false, 
-    isLoggedIn: true,
-  })
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (currentUser) {
-        // Ambil token dan cek apakah user memiliki role admin
-        const token = await getIdTokenResult(currentUser);
-        const isAdmin = token.claims.admin || false;
-  
-        setUser(currentUser);
-        console.log(currentUser)
-        setDummyUser({
-          name: currentUser.email || "User",
-          profilePicture: currentUser.photoURL || "https://avatar.iran.liara.run/public/50",
-          isAdmin: isAdmin, // Set status admin
-          isLoggedIn: true,
-        });
-      } else {
-        setUser(null);
-        setDummyUser({
-          name: "Guest",
-          profilePicture: "https://avatar.iran.liara.run/public/50",
-          isAdmin: false,
-          isLoggedIn: false,
-        });
-      }
-      setLoading(false);
-    });
-  
-    return () => unsubscribe();
-  }, []);
+  const { dummyUser } = GetDummyUser()
 
   useEffect(() => {
       const fetchUtilsGetProduk = async () => {
@@ -116,82 +121,34 @@ export default function App() {
 
       fetchUtilsGetProduk()
   }, [])
+
   return (
     <Router>
-      <Routes>
-        {/* Halaman dengan Header & Footer */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Header dummyUser={dummyUser} />
-              <Home dummyUser={dummyUser} services={services} reviews={reviews} />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/layanan"
-          element={
-            <>
-              <Header dummyUser={dummyUser} />
-              <Layanan dummyUser={dummyUser} services={services} reviews={reviews} />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/order"
-          element={
-            <>
-              <Header dummyUser={dummyUser} />
-              <Order services={services} dummyUser={dummyUser} />
-              <Footer />
-            </>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <>
-              <ListOrders dummyUser={dummyUser} />
-            </>
-          }
-        />
-        <Route
-          path="/admin/create-product"
-          element={
-            <>
-              <CreateProduct dummyUser={dummyUser} />
-            </>
-          }
-        />
-        <Route
-          path="/admin/list-product"
-          element={
-            <>
-              <ListProduk dummyUser={dummyUser} />
-            </>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <>
-              <Profile dummyUser={dummyUser} />
-            </>
-          }
-        />
+    <Routes>
+      {/* Halaman dengan Header & Footer */}
+      <Route path="/" element={<><Header dummyUser={dummyUser} /><Home dummyUser={dummyUser} services={services} reviews={reviews} /><Footer /></>} />
+      <Route path="/layanan" element={<><Header dummyUser={dummyUser} /><Layanan dummyUser={dummyUser} services={services} reviews={reviews} /><Footer /></>} />
+      <Route path="/order" element={<><Header dummyUser={dummyUser} /><Order services={services} dummyUser={dummyUser} /><Footer /></>} />
 
-        {/* Halaman Login & Register (tanpa Header & Footer) */}
-        <Route path="/login" element={<AuthPage type="login" />} />
-        <Route path="/register" element={<AuthPage type="register" />} /> 
-        <Route path="/logout" element={<AuthPage type="logout" />} />
+      {/* Halaman Admin (Hanya bisa diakses oleh "admin") */}
+      <Route path="/admin" element={<PrivateRoute element={<ListOrders dummyUser={dummyUser} />} />} />
+      <Route path="/admin/create-product" element={<PrivateRoute element={<CreateProduct dummyUser={dummyUser} />} />} />
+      <Route path="/admin/list-product" element={<PrivateRoute element={<ListProduk dummyUser={dummyUser} />} />} />
 
-        <Route path="*" element={
-          <NullPage />
-        } />
-      </Routes>
-    </Router>
+      {/* Halaman User (Hanya bisa diakses oleh "guest") */}
+      <Route element={<PrivateRoute mustLogin={true} allowedRole="guest" user={dummyUser} />}>
+        <Route path="/profile" element={<CekAuth context={'profile'} element={<Profile dummyUser={dummyUser} />} />} />
+      </Route>
+
+      {/* Halaman Login & Register (tanpa Header & Footer) */}
+      <Route path="/login" element={<CekAuth element={<AuthPage type="login" />} context={'login'} />} />
+      <Route path="/register" element={<CekAuth element={<AuthPage type="register" />} context={'register'} />} />
+      <Route path="/logout" element={<AuthPage type="logout" />} />
+
+      {/* Not Found Page */}
+      <Route path="*" element={<NullPage />} />
+    </Routes>
+  </Router>
+
   );
 }

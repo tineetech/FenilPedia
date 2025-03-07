@@ -102,6 +102,7 @@ export default function AuthPage({ type }) {
                             type="email"
                             name="email"
                             value={form.email}
+                            placeholder="Masukan Email"
                             onChange={handleChange}
                             className="w-full mt-1 p-2 border rounded-md"
                             required
@@ -113,6 +114,7 @@ export default function AuthPage({ type }) {
                             type="password"
                             name="password"
                             value={form.password}
+                            placeholder="Masukan Password"
                             onChange={handleChange}
                             className="w-full mt-1 p-2 border rounded-md"
                             required

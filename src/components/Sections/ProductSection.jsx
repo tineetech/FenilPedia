@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Select from "react-select";
 import ProductCard from "../Cards/ProductCard";
+import Loading from "../Loading";
 
 const categories = [
     { value: "Semua", label: "Semua" },
@@ -33,7 +34,15 @@ export default function ProductSection({ services }) {
             </div>
 
             {/* Grid Layanan */}
-            <ProductCard filteredServices={filteredServices} />
+            {
+                services.length > 0 ? (
+                    <ProductCard filteredServices={filteredServices} />
+                ) : (
+                    <div className="w-full flex items-center justify-center">
+                        <Loading />
+                    </div>
+                )
+            }
         </div>
     );
 }
