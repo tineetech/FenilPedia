@@ -18,7 +18,7 @@ export default function Home({ services, dummyUser, reviews }) {
             <AboutSection />
             <FeatureSection />
             <ReviewSection reviews={reviews} />
-            <ProductSection services={services} />
+            {/* <ProductSection services={services} /> */}
             <FAQSection />
             <ContactSection />
         </>

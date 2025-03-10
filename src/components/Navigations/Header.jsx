@@ -105,7 +105,7 @@ export default function Header({ dummyUser }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.3 }}
-                        className={`md:hidden fixed top-16 left-0 w-full flex flex-col items-left space-y-4 py-6 ${menuBg}`}
+                        className={`md:hidden fixed top-16 left-0 w-full flex flex-col items-left space-y-4 pb-6 ${menuBg}`}
                     >
                         <div className="space-y-2 pl-6">
                             {/* Navigation */}
@@ -113,8 +113,8 @@ export default function Header({ dummyUser }) {
                                 <a
                                     key={index}
                                     onClick={() => setIsOpen(false)}
-                                    href={`${item.label === 'Beranda' ? '#' : `/#${item.label.toLowerCase().replace(/\s+/g, '-')}`}`}
-                                    className="flex items-center text-sm text-neutral-500 hover:text-teal-300"
+                                    href={`${item.label === 'Beranda' ? '#' : item.label === 'Layanan' ? '/layanan' : `/#${item.label.toLowerCase().replace(/\s+/g, '-')}`}`}
+                                    className="flex items-center pt-3 text-sm text-neutral-500 hover:text-teal-300"
                                 >
                                     {item.icon} {item.label}
                                 </a>
@@ -140,7 +140,7 @@ export default function Header({ dummyUser }) {
                                                 <h4 className="text-xs">Profile</h4>
                                             </div>
                                         </Link>
-                                        <button className="bg-red-400 px-3 py-1 text-white hover:bg-red-600 rounded-full">
+                                        <button className="bg-red-400 px-3 py-1 text-white hover:bg-red-600 rounded-full" onClick={() => window.location.href = '/logout'}>
                                             <div className="flex justify-center">
                                                 <LogOut size={14} className="mr-1 mt-0.5" />
                                                 <h4 className="text-xs">Logout</h4>

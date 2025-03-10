@@ -1,5 +1,29 @@
 @import "tailwindcss";
-.bg-ig {
+.bg-instagram {
     background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://images.fastcompany.com/image/upload/f_auto,q_auto,c_fit/wp-cms/uploads/2023/04/p-1-90878527-instagram-logo.jpg') center center;
+    background-size: contain;
+}
+.bg-tiktok {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://wallpapercat.com/w/full/d/2/3/97960-3328x1698-desktop-hd-tiktok-wallpaper-photo.jpg') center center;
+    background-size: contain;
+}
+.bg-youtube {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://images2.alphacoders.com/795/thumb-1920-795968.png') center center;
+    background-size: contain;
+}
+.bg-thread-ig {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://img.freepik.com/free-vector/gradient-logo-template-new-threads-social-media-application_23-2150730935.jpg') center center;
+    background-size: contain;
+}
+.bg-x-tweet {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://www.shutterstock.com/shutterstock/videos/1106616051/thumb/7.jpg') center center;
+    background-size: contain;
+}
+.bg-whatsapp {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://e0.pxfuel.com/wallpapers/259/890/desktop-wallpaper-whatsapp-brand-resources-whatsapp-icon.jpg') center center;
+    background-size: contain;
+}
+.bg-shoppe {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://i.pinimg.com/originals/fa/84/c3/fa84c3946e5291268d309feefcf97690.png') center center;
     background-size: contain;
 }

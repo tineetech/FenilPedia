@@ -9,9 +9,12 @@ const categories = [
     { value: "Instagram", label: "Instagram" },
     { value: "TikTok", label: "TikTok" },
     { value: "YouTube", label: "YouTube" },
-    { value: "Facebook", label: "Facebook" },
-    { value: "Telegram", label: "Telegram" },
-    { value: "X", label: "X" }
+    // { value: "Facebook", label: "Facebook" },
+    // { value: "Telegram", label: "Telegram" },
+    { value: "Thread", label: "Thread" },
+    { value: "Whatsapp", label: "Whatsapp" },
+    { value: "Shoppe", label: "Shoppe" },
+    { value: "Spotify", label: "Spotify" },
 ];
 
 export default function ProductSection({ services }) {

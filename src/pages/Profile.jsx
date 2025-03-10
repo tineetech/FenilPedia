@@ -4,6 +4,8 @@ import Wave from "../components/Wave";
 import SideBar from "../components/Navigations/Sidebar";
 import Footer from "../components/Navigations/Footer";
 import Chatbot from "../components/Chatbot";
+import { useEffect, useState } from "react";
+import getMethod2 from "../utils/GetMethod2";
 
 const userOrders = [
     { id: 1, name: "Paket Instagram Likes", status: "Pending", date: new Date("2024-02-01") },
@@ -11,6 +13,36 @@ const userOrders = [
 ];
 
 export default function Profile({ dummyUser }) {
+    const [orders, setOrders] = useState([]);
+    const fetchOrders = async () => {
+        try {
+            const data = await getMethod2("orders");
+    
+            if (!data) {
+                console.error("Gagal mengambil data orders");
+                return;
+            }
+    
+            // Mapping data dari Firebase ke format yang sesuai
+            const formattedOrders = Object.entries(data).map(([key, value]) => ({
+                id: key, // Menggunakan key Firebase sebagai id unik
+                name: value.layanan || "Unknown Service",
+                customer: value.orderName || "Anonymous",
+                target: value.target || "-",
+                createdAt: value?.createdAt?.slice(0,10) || "-",
+                status: value.status || "Pending", // Default ke "Pending" jika tidak ada
+                date: value.createdAt ? new Date(value.createdAt) : '-' // Konversi ke Date object
+            }));
+    
+            setOrders(formattedOrders);
+            console.log("Orders berhasil disetel:", formattedOrders);
+        } catch (error) {
+            console.error("Gagal mengambil orders:", error);
+        }
+    };
+    useEffect(() => {
+        fetchOrders()
+    }, [])
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
             <Chatbot />
@@ -42,17 +74,28 @@ export default function Profile({ dummyUser }) {
                         </div>
                     ) : (
                         <div className="text-left">
-                            <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 text-center md:text-left">Order History</h3>
+                            <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4 text-center">Order History</h3>
                             <div className="space-y-4">
-                                {userOrders.map((order) => (
+                                {orders.length > 0 ? orders.sort((a, b) => (b.status === 'SUCCESS') - (a.status === 'SUCCESS')).map((order) => (
                                     <div key={order.id} className="p-4 bg-gray-50 rounded-lg shadow flex flex-col md:flex-row justify-between items-center border border-gray-200">
                                         <div className="text-center md:text-left">
                                             <p className="text-gray-800 font-medium">{order.name}</p>
-                                            <p className={`text-sm font-semibold ${order.status === 'Pending' ? 'text-yellow-500' : 'text-green-600'}`}>{order.status}</p>
-                                            <p className="text-sm text-gray-500">{order.date.toDateString()}</p>
+                                            <p className={`text-sm font-semibold ${order.status === 'PENDING' ? 'text-yellow-500' : 'text-green-600'}`}>{order.status}</p>
+                                            <p className="mb-1 text-sm text-gray-500">{order.date.toDateString()}</p>
+                                            {
+                                                order.status === 'PENDING' ? (
+                                                    <a href={`https://wa.me/${'6283819912771'}?text=${encodeURIComponent('Min saya mau konfirmasi pesanan dengan id ' + order.id)}`} className="pt-3 text-blue-500 underline">
+                                                        Konfirmasi Pembayaran
+                                                    </a>
+                                                ) : ''
+                                            }
                                         </div>
                                     </div>
-                                ))}
+                                )): (
+                                    <div className="w-full text-center h-30 flex items-center justify-center">
+                                        Kamu belum memesan apapun.
+                                    </div>
+                                )}
                             </div>
                         </div>
                     )}

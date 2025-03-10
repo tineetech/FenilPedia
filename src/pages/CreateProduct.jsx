@@ -12,9 +12,13 @@ import getMethod from "../utils/GetMethod";
 
 const socialMediaOptions = [
     { value: "Instagram", label: "Instagram" },
-    { value: "YouTube", label: "YouTube" },
     { value: "TikTok", label: "TikTok" },
-    { value: "Facebook", label: "Facebook" },
+    { value: "YouTube", label: "YouTube" },
+    { value: "Whatsapp", label: "Whatsapp" },
+    { value: "Shoppe", label: "Shoppe" },
+    { value: "Thread", label: "Thread" },
+    { value: "X", label: "X" },
+    { value: "Spotify", label: "Spotify" },
 ];
 
 const serviceOptions = [
@@ -22,6 +26,10 @@ const serviceOptions = [
     { value: "subscribers", label: "Subscribers" },
     { value: "views", label: "Views" },
     { value: "followers", label: "Followers" },
+    { value: "whatsapp_channel_member", label: "Whatssap Channel Member" },
+    { value: "live_stream", label: "Live Stream" },
+    { value: "free_plays", label: "Free plays (PREMIUM ACC)" },
+    { value: "lainnya", label: "Lainnya" },
 ];
 
 export default function CreateProduct({ dummyUser }) {
@@ -125,7 +133,7 @@ export default function CreateProduct({ dummyUser }) {
                     </div>
                 </div>
                 <div className="max-w-3xl mx-auto p-8 mt-6 mb-12">
-                    <h1 className="text-xl md:text-3xl text-center my-4 font-semibold">Buat Produk Baru</h1>
+                    <h1 className="text-xl md:text-3xl text-center my-4 font-semibold">Buat Layanan Baru</h1>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label className="block text-gray-700 font-medium mb-2">Nama Layanan <span className="text-red-600">*</span></label>

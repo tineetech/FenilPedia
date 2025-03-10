@@ -36,12 +36,12 @@ export default function HeroCard() {
                 <h3>Produk dan Layanan</h3>
             </div>
             <div className="flex flex-col justify-center text-center bg-white text-gray-700 px-12 rounded-2xl py-2 md:py-4 drop-shadow-md">
-                <h1 className="text-3xl font-bold text-teal-400">{totalOrders}</h1>
-                <h3>Order selesai</h3>
+                <h1 className="text-3xl font-bold text-teal-400">{'10,310'}</h1>
+                <h3>Pesanan Dikerjakan</h3>
             </div>
             <div className="flex flex-col justify-center text-center bg-white text-gray-700 px-12 rounded-2xl py-2 md:py-4 drop-shadow-md">
-                <h1 className="text-3xl font-bold text-teal-400">99%</h1>
-                <h3>Kepuasan pelanggan</h3>
+                <h1 className="text-3xl font-bold text-teal-400">{'5,276'}</h1>
+                <h3>Pengguna Aktif</h3>
             </div>
         </div>
     )

@@ -2,12 +2,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Header from "./components/Navigations/Header";
 import Home from "./pages/Home";
 import Order from "./pages/Order";
-import AuthPage from "./pages/AuthPage"; // 
+import AuthPage from "./pages/AuthPage";
 import Footer from "./components/Navigations/Footer";
 import ListOrders from "./pages/ListOrders";
 import Profile from "./pages/Profile";
-import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
+import { FaTiktok, FaYoutube, FaInstagram, FaFacebook, FaTelegramPlane, FaWhatsapp, FaShoppingBasket, FaSpotify } from "react-icons/fa";
+import { FaThreads, FaXTwitter } from "react-icons/fa6";
 import CreateProduct from "./pages/CreateProduct";
 import NullPage from "./pages/NullPage";
 import './App.css'
@@ -42,6 +42,10 @@ const platformIcons = {
   YouTube: <FaYoutube size={24} />,
   Facebook: <FaFacebook size={24} />,
   Telegram: <FaTelegramPlane size={24} />,
+  Whatsapp: <FaWhatsapp size={24} />,
+  Shoppe: <FaShoppingBasket size={24} />,
+  Thread: <FaThreads size={24} />,
+  Spotify: <FaSpotify size={24} />,
   X: <FaXTwitter size={24} />,
 };
 
@@ -60,7 +64,10 @@ const CekAuth = ({element, context}) => {
   const { dummyUser } = GetDummyUser()
   const cekLogin = localStorage.getItem('authToken')
   // const cekAdmin = sessionStorage.getItem('role')
-  if (context === 'profile') {
+  if (context === 'order') {
+    if (!cekLogin && !dummyUser.isLoggedIn) return <Navigate to='/login' replace />
+    return element
+  } else if (context === 'profile') {
     if (!cekLogin && !dummyUser.isLoggedIn) return <Navigate to='/' replace />
     return element
   } else if (context === 'login' || context === 'register') {
@@ -101,16 +108,16 @@ export default function App() {
               if (!data) return 'gagal'
               const mappedServices = Object.values(data).flatMap((item, index) => {
                 // Jika item berupa array, ambil indeks yang memiliki data produk
+                // console.log(item)
                 const produkData = Array.isArray(item) ? item.find(obj => typeof obj === "object") : item;
-          
                 if (!produkData) return []; // Jika tidak ada data, return array kosong
                 
                 return {
                   id: index + 1,
                   name: produkData.name || "Unknown Product",
-                  category: produkData.category || "Unknown Category",
+                  category: produkData.brandSosmed || "Unknown Category",
                   price: `Mulai Rp ${produkData.price ? produkData.price.toLocaleString() : "0"}`,
-                  icon: platformIcons[produkData.category] || <FaInstagram size={24} />, // Default icon
+                  icon: platformIcons['Whatsapp'] || <FaInstagram size={24} />, // Default icon
                 };
               });
               setServies(mappedServices);
@@ -128,7 +135,6 @@ export default function App() {
       {/* Halaman dengan Header & Footer */}
       <Route path="/" element={<><Header dummyUser={dummyUser} /><Home dummyUser={dummyUser} services={services} reviews={reviews} /><Footer /></>} />
       <Route path="/layanan" element={<><Header dummyUser={dummyUser} /><Layanan dummyUser={dummyUser} services={services} reviews={reviews} /><Footer /></>} />
-      <Route path="/order" element={<><Header dummyUser={dummyUser} /><Order services={services} dummyUser={dummyUser} /><Footer /></>} />
 
       {/* Halaman Admin (Hanya bisa diakses oleh "admin") */}
       <Route path="/admin" element={<PrivateRoute element={<ListOrders dummyUser={dummyUser} />} />} />
@@ -136,9 +142,8 @@ export default function App() {
       <Route path="/admin/list-product" element={<PrivateRoute element={<ListProduk dummyUser={dummyUser} />} />} />
 
       {/* Halaman User (Hanya bisa diakses oleh "guest") */}
-      <Route element={<PrivateRoute mustLogin={true} allowedRole="guest" user={dummyUser} />}>
-        <Route path="/profile" element={<CekAuth context={'profile'} element={<Profile dummyUser={dummyUser} />} />} />
-      </Route>
+      <Route path="/profile" element={<CekAuth context={'profile'} element={<Profile dummyUser={dummyUser} />} />} />
+      <Route path="/order" element={<CekAuth context={'order'} element={<><Header dummyUser={dummyUser} /><Order services={services} dummyUser={dummyUser} /><Footer /></>} />} />
 
       {/* Halaman Login & Register (tanpa Header & Footer) */}
       <Route path="/login" element={<CekAuth element={<AuthPage type="login" />} context={'login'} />} />

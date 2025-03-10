@@ -151,11 +151,12 @@ export default function Order({ dummyUser }) {
             
             Swal.fire({
                 title: "Berhasil!",
-                text: "Kamu berhasil membuat pesanan. sekarang konfirmasi pembayaran ke whatsapp admin.",
+                text: "Kamu berhasil membuat pesanan. jangan lupa untuk konfirmasi pembayaran ke whatsapp admin.",
                 icon: "success",
             }).then((res) => {
                 if (res.isConfirmed) {
-                    window.location.href = whatsappURL;
+                    window.location.href = '/profile';
+                    // localStorage.setItem('createOrder')
                 }
             })
 

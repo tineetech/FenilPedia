@@ -20,7 +20,7 @@ export default function HeroSection({dummyUser}) {
                         <div className="flex">
                             <Link
                                 to="/layanan"
-                                className="flex align-middle text-center rounded-full bg-white text-teal-500 px-3 py-1 text-sm md:px-6 md:py-2 font-semibold hover:bg-teal-500 hover:text-white transition-all mr-4"
+                                className="flex align-middle text-center rounded-full bg-white text-teal-500 px-5 py-3 text-sm md:px-8 md:py-4 font-semibold hover:bg-teal-500 hover:text-white transition-all mr-4"
                             >
                                 <LogIn size={18} className="mr-2" />
                                 Mulai Sekarang

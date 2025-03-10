@@ -65,11 +65,11 @@ const Chatbot = () => {
         chatBodyRef.current.scrollTo({ top: chatBodyRef.current.scrollHeight, behavior: "smooth" });
     }, [chatHistory]);
   return (
-    <div className='fixed items-center flex justify-center top-0 left-0 w-screen h-screen z-60'>
-        <div className='bg-white rounded-lg border border-gray-300 overflow-hidden shadow w-[70px] h-[70px] absolute right-10 bottom-10 cursor-pointer' onClick={() => setIsClick(!isClick)}>
+    <>
+        <div className='bg-white rounded-lg border border-gray-300 overflow-hidden shadow w-[70px] h-[70px] fixed z-50 right-10 bottom-10 cursor-pointer' onClick={() => setIsClick(!isClick)}>
             <img src="/images/chatbot.jpg" className='' alt="" />
         </div>
-        <div className={`absolute flex flex-col container right-10 bottom-30 shadow w-[250px] h-[350px] bg-gray-100 rounded-md ${isClick ? "" : 'hidden'}`}>
+        <div className={`fixed z-50 flex flex-col container right-10 bottom-30 shadow w-[250px] h-[350px] bg-gray-100 rounded-md ${isClick ? "" : 'hidden'}`}>
             <div className='w-full h-full relative'>
                 <div className='px-5 py-3 w-full border-b border-gray-200 text-center'>
                     <span className='font-bold'>Chatbot</span>
@@ -105,14 +105,14 @@ const Chatbot = () => {
                     )}
                 </div>
                 <form onSubmit={(e) => handleSubmitChat(e)} className='absolute flex bottom-0 w-full h-auto  justify-center gap-1 items-center mb-2'>
-                    <input type="text" ref={inputRef} name='chat' className='w-auto bg-white hover:border-0 rounded-md h-[35px] p-2' placeholder='Tanya Ke chatbot kami..' />
+                    <input type="text" ref={inputRef} name='chat' className='w-50 md:w-auto bg-white hover:border-0 rounded-md h-[35px] p-2' placeholder='Tanya Ke chatbot kami..' />
                     <button disabled={disButton ? true : false} type='submit' className='bg-blue-500 flex items-center justify-center rounded-md text-white w-[35px] h-[35px] cursor-pointer'>
                         <SendIcon size={20} />
                     </button>
                 </form>
             </div>
         </div>
-    </div>
+    </>
   )
 }
 
