@@ -111,13 +111,13 @@ export default function App() {
                 // console.log(item)
                 const produkData = Array.isArray(item) ? item.find(obj => typeof obj === "object") : item;
                 if (!produkData) return []; // Jika tidak ada data, return array kosong
-                
+                console.log(item)
                 return {
                   id: index + 1,
                   name: produkData.name || "Unknown Product",
                   category: produkData.brandSosmed || "Unknown Category",
                   price: `Mulai Rp ${produkData.price ? produkData.price.toLocaleString() : "0"}`,
-                  icon: platformIcons['Whatsapp'] || <FaInstagram size={24} />, // Default icon
+                  icon: platformIcons[produkData.brandSosmed] || <FaInstagram size={24} />, // Default icon
                 };
               });
               setServies(mappedServices);
