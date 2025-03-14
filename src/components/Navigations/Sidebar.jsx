@@ -34,6 +34,21 @@ export default function Sidebar({ dummyUser }) {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link to="/admin/list-kategori" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                        <FaBox className="text-xs md:text-lg" /> List Kategori
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin/create-type" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                        <FaPlus className="text-xs md:text-lg" /> Buat Tipe Layanan
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/admin/create-brand" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
+                                        <FaPlus className="text-xs md:text-lg" /> Buat Brand Sosmed
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link to="/admin/list-product" className="flex items-center gap-3 p-3 hover:bg-gray-700 rounded-md text-xs md:text-base">
                                         <FaBox className="text-xs md:text-lg" /> List Produk
                                     </Link>

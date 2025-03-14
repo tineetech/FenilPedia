@@ -1,28 +1,36 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Select from "react-select";
 import ProductCard from "../Cards/ProductCard";
 import Loading from "../Loading";
-
-const categories = [
-    { value: "Semua", label: "Semua" },
-    { value: "Instagram", label: "Instagram" },
-    { value: "TikTok", label: "TikTok" },
-    { value: "YouTube", label: "YouTube" },
-    // { value: "Facebook", label: "Facebook" },
-    // { value: "Telegram", label: "Telegram" },
-    { value: "Thread", label: "Thread" },
-    { value: "Whatsapp", label: "Whatsapp" },
-    { value: "Shoppe", label: "Shoppe" },
-    { value: "Spotify", label: "Spotify" },
-];
+import getMethod from "../../utils/GetMethod";
 
 export default function ProductSection({ services }) {
+    const [categories, setCategories] = useState([])
     const [activeCategory, setActiveCategory] = useState("Semua");
     const filteredServices = activeCategory === "Semua"
         ? services
         : services.filter(service => service.category === activeCategory);
 
+    useEffect(() => {
+        const fetchUtilsGetBrand = async () => {
+            try {
+                const data = await getMethod('brand');
+
+                // optional condition
+                setCategories(
+                    data.map(item => ({
+                        value: item.name,
+                        label: item.name
+                    }))
+                );                
+            } catch (error) {
+                console.error("Gagal mengambil data:", error.message);
+            }
+        };
+        
+        fetchUtilsGetBrand()
+    }, [])
     return (
         <div className="max-w-7xl mx-auto py-12 px-6" id="layanan">
             <h2 className="text-3xl font-bold text-center mb-8">Layanan Kami</h2>

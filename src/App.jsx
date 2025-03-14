@@ -19,6 +19,9 @@ import { getIdTokenResult } from "firebase/auth";
 import ListProduk from "./pages/ListProduk";
 import Layanan from "./pages/Layanan";
 import GetDummyUser from "./GetDummyUser";
+import ListKategori from "./pages/ListKategori";
+import CreateType from "./pages/CreateType";
+import CreateBrand from "./pages/CreateBrand";
 
 
 const reviews = [
@@ -71,7 +74,6 @@ const CekAuth = ({element, context}) => {
     if (!cekLogin && !dummyUser.isLoggedIn) return <Navigate to='/' replace />
     return element
   } else if (context === 'login' || context === 'register') {
-    console.log(dummyUser)
     if (cekLogin && dummyUser && dummyUser.isLoggedIn) return <Navigate to='/' replace />
     return element
   }
@@ -111,7 +113,6 @@ export default function App() {
                 // console.log(item)
                 const produkData = Array.isArray(item) ? item.find(obj => typeof obj === "object") : item;
                 if (!produkData) return []; // Jika tidak ada data, return array kosong
-                console.log(item)
                 return {
                   id: index + 1,
                   name: produkData.name || "Unknown Product",
@@ -140,6 +141,9 @@ export default function App() {
       <Route path="/admin" element={<PrivateRoute element={<ListOrders dummyUser={dummyUser} />} />} />
       <Route path="/admin/create-product" element={<PrivateRoute element={<CreateProduct dummyUser={dummyUser} />} />} />
       <Route path="/admin/list-product" element={<PrivateRoute element={<ListProduk dummyUser={dummyUser} />} />} />
+      <Route path="/admin/create-type" element={<PrivateRoute element={<CreateType dummyUser={dummyUser} />} />} />
+      <Route path="/admin/create-brand" element={<PrivateRoute element={<CreateBrand dummyUser={dummyUser} />} />} />
+      <Route path="/admin/list-kategori" element={<PrivateRoute element={<ListKategori dummyUser={dummyUser} />} />} />
 
       {/* Halaman User (Hanya bisa diakses oleh "guest") */}
       <Route path="/profile" element={<CekAuth context={'profile'} element={<Profile dummyUser={dummyUser} />} />} />

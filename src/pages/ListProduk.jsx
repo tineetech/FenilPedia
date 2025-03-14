@@ -66,7 +66,7 @@ export default function ListProduk({ dummyUser }) {
         { name: "Nama Layanan", selector: row => row.name, sortable: true },
         { name: "Tipe", selector: row => row.serviesType, sortable: true },
         { name: "Brand target", selector: row => row.brandSosmed, sortable: true },
-        { name: "Harga", selector: row => row.price, sortable: true },
+        { name: "Harga", selector: row => "Rp" + row.price, sortable: true },
         {
             name: "Aksi",
             cell: row => (

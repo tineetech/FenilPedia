@@ -10,31 +10,18 @@ import Swal from "sweetalert2";
 import getMethod from "../utils/GetMethod";
 
 
-const socialMediaOptions = [
-    { value: "Instagram", label: "Instagram" },
-    { value: "TikTok", label: "TikTok" },
-    { value: "YouTube", label: "YouTube" },
-    { value: "Whatsapp", label: "Whatsapp" },
-    { value: "Shoppe", label: "Shoppe" },
-    { value: "Thread", label: "Thread" },
-    { value: "X", label: "X" },
-    { value: "Spotify", label: "Spotify" },
-];
 
-const serviceOptions = [
-    { value: "likes", label: "Likes" },
-    { value: "subscribers", label: "Subscribers" },
-    { value: "views", label: "Views" },
-    { value: "followers", label: "Followers" },
-    { value: "whatsapp_channel_member", label: "Whatssap Channel Member" },
-    { value: "live_stream", label: "Live Stream" },
-    { value: "free_plays", label: "Free plays (PREMIUM ACC)" },
-    { value: "lainnya", label: "Lainnya" },
-];
+const trueFalseOption = [
+    { value: true, label: 'YA' },
+    { value: false, label: 'TIDAK' },
+]
 
 export default function CreateProduct({ dummyUser }) {
     const [selectedSocialMedia, setSelectedSocialMedia] = useState(null);
     const [selectedService, setSelectedService] = useState(null);
+    const [selectedTarget, setSelectedTarget] = useState({ value: true, label: 'YA' });
+    const [socialMediaOptions, setSocialMediaOptions] = useState([]);
+    const [serviceOptions, setServiceOptions] = useState([]);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
@@ -51,8 +38,9 @@ export default function CreateProduct({ dummyUser }) {
     
         const newProduct = {
             name,
-            price,
+            price: price.replace(/\./g, ""),
             description,
+            isRequireTarget: selectedTarget.value,
             serviesType: selectedService?.value || "Unknown Service",
             brandSosmed: selectedSocialMedia?.value || "Unknown Platform",
         };
@@ -84,7 +72,24 @@ export default function CreateProduct({ dummyUser }) {
             console.error("❌ Gagal menambahkan produk:", error.message);
         }
     }    
-    
+    const formatRupiah = (value) => {
+        // Hapus semua karakter selain angka
+        let numberString = value.replace(/\D/g, "");
+
+        // Format angka menjadi Rupiah dengan titik pemisah ribuan
+        return new Intl.NumberFormat("id-ID").format(numberString);
+    };
+
+    const handleChange = (e) => {
+        let rawValue = e.target.value;
+
+        // Format nilai input sebagai Rupiah
+        let formattedValue = formatRupiah(rawValue);
+
+        // Simpan nilai yang telah diformat ke state
+        setPrice(formattedValue);
+    };
+
        
     useEffect(() => {
         const fetchUtilsGetProduk = async () => {
@@ -94,6 +99,36 @@ export default function CreateProduct({ dummyUser }) {
                 // optional condition
                 setTotalProduk(data.length);
                 console.log(data)
+            } catch (error) {
+                console.error("Gagal mengambil data:", error.message);
+            }
+        };
+        const fetchUtilsGetBrand = async () => {
+            try {
+                const data = await getMethod('brand');
+
+                // optional condition
+                setSocialMediaOptions(
+                    data.map(item => ({
+                        value: item.name,
+                        label: item.name
+                    }))
+                );                
+            } catch (error) {
+                console.error("Gagal mengambil data:", error.message);
+            }
+        };
+        const fetchUtilsGetTipe = async () => {
+            try {
+                const data = await getMethod('tipe');
+
+                // optional condition
+                setServiceOptions(
+                    data.map(item => ({
+                        value: item.name,
+                        label: item.name
+                    }))
+                );                
             } catch (error) {
                 console.error("Gagal mengambil data:", error.message);
             }
@@ -110,6 +145,8 @@ export default function CreateProduct({ dummyUser }) {
         };
         fetchUtilsGetProduk();
         fetchUtilsGetOrder()
+        fetchUtilsGetBrand()
+        fetchUtilsGetTipe()
     }, []);
     return (
         <div className="flex flex-col md:flex-row min-h-screen">
@@ -170,13 +207,25 @@ export default function CreateProduct({ dummyUser }) {
                         </div>
 
                         <div>
+                            <label className="block text-gray-700 font-medium mb-2">Perlu Target Username <span className="text-red-600">*</span></label>
+                            <Select
+                                options={trueFalseOption}
+                                onChange={setSelectedTarget}
+                                value={selectedTarget}
+                                required
+                                placeholder="Jika mengharuskan pengguna mengetik usernamenya.."
+                                className="text-gray-700"
+                            />
+                        </div>
+
+                        <div>
                             <label className="block text-gray-700 font-medium mb-2">Harga <span className="text-red-600">*</span></label>
                             <input
-                                type="number"
+                                type="text"
                                 className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
                                 placeholder="Masukkan harga"
                                 value={price}
-                                onChange={(e) => setPrice(e.target.value)}
+                                onChange={handleChange}
                                 required
                             />
                         </div>

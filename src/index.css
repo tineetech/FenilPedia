@@ -27,3 +27,7 @@
     background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://i.pinimg.com/originals/fa/84/c3/fa84c3946e5291268d309feefcf97690.png') center center;
     background-size: contain;
 }
+.bg-spotify {
+    background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,1)), url('https://miro.medium.com/v2/resize:fit:1100/format:webp/1*ZlslKG46llEU90vXWORnxg.png') center center;
+    background-size: contain;
+}

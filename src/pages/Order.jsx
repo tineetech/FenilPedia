@@ -12,16 +12,40 @@ import Swal from "sweetalert2";
 import Chatbot from "../components/Chatbot";
 
 const metodePay = [
-    { label: "GOPAY - 0878-7480-2713", value: "GOPAY" },
-    { label: "DANA - 0878-7480-2713", value: "DANA" },
-    { label: "OVO - 0878-7480-2713", value: "OVO" },
-    { label: "BANK TRANSFER - CHAT DI WA", value: "BANK TRANSFER" },
+    { label: "Gopay Virtual account ( Biaya admin 0,9% ) - 0878-7480-2713", value: "GOPAY", image: 'https://logowik.com/content/uploads/images/gopay7196.jpg' },
+    { label: "Dana Virtual account ( Biaya admin 0,8% ) - 0878-7480-2713", value: "DANA", image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Logo_dana_blue.svg/2560px-Logo_dana_blue.svg.png' },
+    { label: "QRIS ALL PAYMENT ( VIA WHATSAPP BIAYA ADMIN 0,9% ) - CHAT DI WA", value: "QRIS", image: 'https://images.seeklogo.com/logo-png/39/1/quick-response-code-indonesia-standard-qris-logo-png_seeklogo-391791.png' },
+    { label: "Ovo Virtual account ( Soon released )", value: "OVO", image: 'https://i.pinimg.com/736x/28/fd/ed/28fdedc2022b5de9ae5a7f2507eb5f2d.jpg' },
 ];
+
+
+// Komponen untuk menampilkan gambar dalam daftar opsi
+const CustomOption = (props) => {
+    const { data, innerRef, innerProps } = props;
+    return (
+        <div ref={innerRef} {...innerProps} className="flex items-center gap-2 p-2 cursor-pointer hover:bg-gray-100">
+            <img src={data.image} alt={data.label} className="w-6 h-6 object-contain" />
+            <span>{data.label}</span>
+        </div>
+    );
+};
+
+// Komponen untuk menampilkan gambar pada opsi yang terpilih
+const CustomSingleValue = (props) => {
+    const { data } = props;
+    return (
+        <div className="flex items-center gap-2">
+            <img src={data.image} alt={data.label} className="w-6 h-6" />
+            <span>{data.label}</span>
+        </div>
+    );
+};
 
 export default function Order({ dummyUser }) {
     const [data, setData] = useState([])
     const [namesLayanan, setNamesLayanan] = useState([])
-    const [serviceOptions, setServiceOptions] = useState([])
+    const [serviceOptions, setServiceOptions] = useState([
+    ])
     const [selecteLayanan, setSelectedLayanan] = useState(null);
     const [selectedService, setSelectedService] = useState(null);
     const [selectedPayment, setSelectedPayment] = useState(null);
@@ -33,12 +57,6 @@ export default function Order({ dummyUser }) {
     
     const location = useLocation();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (dummyUser?.isLoggedIn === false) {
-            navigate("/login");
-        }
-    }, [dummyUser, navigate]);
     
     useEffect(() => {
         const fetchUtilsGetProduk = async () => {
@@ -49,9 +67,13 @@ export default function Order({ dummyUser }) {
                 if (!data) return 'gagal'
 
                 setNamesLayanan([...data].map(sosmed => ({ label: sosmed.name + ' - ' + sosmed.brandSosmed + ' - ' + parseFloat(sosmed.price), value: sosmed.name })));
-                setServiceOptions([...data].map(service => ({ label: service, value: service })));
+                setServiceOptions(
+                    [...new Set(data.map(service => service.brandSosmed))].map(uniqueBrand => ({
+                        label: uniqueBrand,
+                        value: uniqueBrand
+                    }))
+                );                
                 setData(data)
-                console.log(data)
             } catch (error) {
                 console.error("Gagal mengambil data:", error.message);
             }
@@ -59,6 +81,29 @@ export default function Order({ dummyUser }) {
 
         fetchUtilsGetProduk()
     }, [])
+    
+    useEffect(() => {
+        if (selectedService) {
+            let find = data.filter(item => item.brandSosmed === selectedService.value);
+    
+            if (find.length > 0) {
+                setNamesLayanan(find.map(sosmed => ({
+                    label: sosmed.name + ' - ' + sosmed.brandSosmed + ' - Rp' + parseFloat(sosmed.price) + ',00',
+                    value: sosmed.name
+                })));
+                // if (selecteLayanan !== null) { 
+                //     setSelectedLayanan(null);
+                // }
+            }
+        }
+    }, [selectedService]);
+
+    // useEffect(() => {
+    //     if (selectedService !== null && selecteLayanan !== null) {
+    //             setSelectedLayanan(null);
+    //         console.log('tes')
+    //     }
+    // }, [selectedService])
     
     useEffect(() => {
         if (selecteLayanan) {
@@ -72,7 +117,6 @@ export default function Order({ dummyUser }) {
                 setPriceinit(parseInt(find.price))
             }
     
-            console.log(find);
         }
     }, [selecteLayanan, data]);    
 
@@ -110,6 +154,11 @@ export default function Order({ dummyUser }) {
     
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (dummyUser?.isLoggedIn === false) {
+            navigate("/login");
+            // console.log('woi : ', dummyUser)
+        }
 
         if (!selecteLayanan || !selectedService || !username || !nomor || !quantity || !selectedPayment) {
             alert("Harap lengkapi semua data!");
@@ -182,12 +231,24 @@ export default function Order({ dummyUser }) {
                     <h1 className="text-xl md:text-3xl text-center my-4 font-semibold">Detail Pesanan</h1>
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
+                            <label className="block text-gray-700 font-medium mb-2">Jenis Sosial Media</label>
+                            <Select
+                                options={serviceOptions}
+                                value={selectedService}
+                                onChange={setSelectedService}
+                                placeholder="Pilih Jenis Sosmed"
+                                className="text-gray-700"
+                            />
+                        </div>
+
+                        <div>
                             <label className="block text-gray-700 font-medium mb-2">Nama Layanan</label>
                             <Select
                                 options={namesLayanan}
                                 value={selecteLayanan}
                                 onChange={setSelectedLayanan}
                                 placeholder="Pilih Layanan"
+                                isClearable
                                 className="text-gray-700 mb-2"
                             />
                             {
@@ -195,18 +256,6 @@ export default function Order({ dummyUser }) {
                                     <span className="text-gray-400">Estimasi 2-3 Jam.</span>
                                 ) : ''
                             }
-                        </div>
-
-                        <div>
-                            <label className="block text-gray-700 font-medium mb-2">Jenis Sosial Media</label>
-                            <Select
-                                options={serviceOptions}
-                                isDisabled
-                                value={selectedService}
-                                onChange={setSelectedService}
-                                placeholder="Pilih Layanan Dahulu"
-                                className="text-gray-700"
-                            />
                         </div>
 
                         <div>
@@ -262,7 +311,7 @@ export default function Order({ dummyUser }) {
                                     value={priceInit || ""}
                                     readOnly
                                 />
-                                <span className="px-3 py-3 bg-gray-200 text-gray-700 rounded-r-lg">.00</span>
+                                <span className="px-3 py-3 bg-gray-200 text-gray-700 rounded-r-lg">,00</span>
                             </div>
                         </div>
 
@@ -277,7 +326,7 @@ export default function Order({ dummyUser }) {
                                     value={priceTotal || ""}
                                     readOnly
                                 />
-                                <span className="p-3 bg-gray-200 text-gray-700 rounded-r-lg">.00</span>
+                                <span className="p-3 bg-gray-200 text-gray-700 rounded-r-lg">,00</span>
                             </div>
                         </div>
 
@@ -288,8 +337,9 @@ export default function Order({ dummyUser }) {
                                 value={selectedPayment}
                                 onChange={setSelectedPayment}
                                 placeholder="Pilih Layanan Dahulu"
-                                isDisabled={selecteLayanan ? false : true}
+                                isDisabled={!selecteLayanan}
                                 className={`text-gray-700 mb-2 ${selecteLayanan ? '' : '!bg-gray-100'}`}
+                                components={{ Option: CustomOption, SingleValue: CustomSingleValue }} // Menggunakan custom components
                             />
                             <span className="text-red-600">Semua motede pembayaran wajib konfirmasi setelah membayar ke nomor wa <a className="underline" href="https://wa.me/6283819912771">admin.</a></span>
                         </div>
